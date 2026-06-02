@@ -1,0 +1,68 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,300;0,400;0,500;0,700;1,300;1,400&family=Inter:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;700&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&display=swap');
+@import "tailwindcss";
+
+@theme {
+  --font-sans: "Roboto", "Inter", ui-sans-serif, system-ui, sans-serif;
+  --font-display: "Roboto", "Space Grotesk", sans-serif;
+  --font-serif: "Playfair Display", Georgia, serif;
+  --font-mono: "JetBrains Mono", ui-monospace, SFMono-Regular, monospace;
+}
+
+html, body {
+  font-family: "Roboto", "Inter", sans-serif;
+  color: #1c1917; /* stone-900 */
+  background-color: #fcfbfa; /* match ambient clean style */
+}
+
+button, input, select, textarea {
+  font-family: inherit;
+}
+
+/* Custom styling enhancements */
+h1, h2, h3, h4 {
+  font-family: var(--font-display);
+  letter-spacing: -0.025em;
+  font-weight: 700;
+}
+
+.font-editorial {
+  font-family: var(--font-serif);
+}
+
+strong {
+  font-weight: 600;
+}
+
+/* Helper styles */
+.hide-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+.hide-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+/* Notebook paper style backgrounds */
+.notebook-paper {
+  background-color: #fcfbfa;
+  background-image: radial-gradient(#ebeae6 1.5px, transparent 1.5px);
+  background-size: 24px 24px;
+}
+
+/* Security scan line effect */
+@keyframes scanline {
+  0% { transform: translateY(-100%); }
+  100% { transform: translateY(100%); }
+}
+.scanline-effect {
+  position: relative;
+  overflow: hidden;
+}
+.scanline-effect::after {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0; height: 4px;
+  background: rgba(245, 158, 11, 0.25);
+  animation: scanline 5s linear infinite;
+  pointer-events: none;
+}
