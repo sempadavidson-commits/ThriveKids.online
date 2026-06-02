@@ -1,6 +1,8 @@
 {
   "name": "ThriveKids Global Foundation",
-  "description": "An internationally respected, highly transparent nonprofit digital platform supporting children and families through education, health support, child protection, and community empowerment.",
+  "description": "Digital platform supporting children and families through education, health support, child protection, and community empowerment",
+  "organization": "ThriveKids Global Foundation",
+  "website": "https://thrive-kids-online.vercel.app",
   "requestFramePermissions": [],
   "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
 }
