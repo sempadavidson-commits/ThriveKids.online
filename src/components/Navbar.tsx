@@ -37,10 +37,10 @@ export default function Navbar({
           className="cursor-pointer select-none text-left"
         >
           <span className="font-sans font-black text-lg md:text-xl tracking-wider text-stone-950 block leading-tight">
-            THRIVEKIDS
+            THRIVE KIDS AFRICA
           </span>
           <span className="font-mono text-[9px] uppercase tracking-[0.25em] text-[#10b981] font-bold block leading-none">
-            foundation
+            🌍 foundation
           </span>
         </div>
 
