@@ -407,6 +407,11 @@ export default function App() {
           .marquee-track{animation-duration:30s!important}
           .impact-grid{grid-template-columns:repeat(2,1fr)}
         }
+
+        /* respect prefers-reduced-motion */
+        @media (prefers-reduced-motion: reduce) {
+          .marquee-track, .marquee-vert-track { animation: none !important }
+        }
       `}</style>
     </div>
   );
