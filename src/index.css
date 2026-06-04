@@ -2,14 +2,14 @@
 @import "tailwindcss";
 
 @theme {
-  --font-sans: "Roboto", "Inter", ui-sans-serif, system-ui, sans-serif;
-  --font-display: "Roboto", "Space Grotesk", sans-serif;
-  --font-serif: "Playfair Display", Georgia, serif;
+  --font-sans: "Roboto", sans-serif;
+  --font-display: "Roboto", sans-serif;
+  --font-serif: "Roboto", sans-serif;
   --font-mono: "JetBrains Mono", ui-monospace, SFMono-Regular, monospace;
 }
 
 html, body {
-  font-family: "Roboto", "Inter", sans-serif;
+  font-family: "Roboto", sans-serif;
   color: #1c1917; /* stone-900 */
   background-color: #fcfbfa; /* match ambient clean style */
 }

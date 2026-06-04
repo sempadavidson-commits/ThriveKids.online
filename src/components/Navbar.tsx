@@ -4,23 +4,18 @@ interface NavbarProps {
   currentPath: string;
   currentSubPath?: string;
   onNavigate: (path: string, subPath?: string) => void;
-  cmsActive: boolean;
-  onToggleCms: () => void;
 }
 
 export default function Navbar({ 
   currentPath, 
   currentSubPath, 
-  onNavigate, 
-  cmsActive, 
-  onToggleCms 
+  onNavigate 
 }: NavbarProps) {
   const [menuOpen, setMenuOpen] = useState(false);
 
+  // Cleaned navigation list matching structural requirements
   const navItems = [
     { label: 'HOME', path: 'home' },
-    { label: 'INITIATIVES', path: 'programs' },
-    { label: 'IMPACT LEDGER', path: 'impact' },
     { label: 'GET INVOLVED', path: 'get-involved' },
     { label: 'UPDATES', path: 'news-events' },
     { label: 'GALLERY', path: 'gallery' }
@@ -57,7 +52,7 @@ export default function Navbar({
               <button
                 key={item.path}
                 onClick={() => handleLinkClick(item.path)}
-                className={`hover:text-stone-950 transition-colors cursor-pointer relative py-2 ${
+                className={`hover:text-stone-950 transition-colors cursor-pointer relative py-2 uppercase ${
                   isActive ? 'text-stone-950 font-bold' : ''
                 }`}
               >
@@ -68,28 +63,10 @@ export default function Navbar({
               </button>
             );
           })}
-          
-          <span className="text-stone-200 h-4 w-[1px]"></span>
-
-          <button
-            onClick={() => handleLinkClick('donate')}
-            className={`px-5 py-2.5 bg-stone-950 text-white hover:bg-stone-800 rounded text-xs font-semibold tracking-wider transition-colors cursor-pointer ${
-              currentPath === 'donate' ? 'bg-[#10b981] hover:bg-emerald-600' : ''
-            }`}
-          >
-            CONTRIBUTE
-          </button>
         </nav>
 
         {/* Responsive Mobile / Tablet Toggle Header Button */}
         <div className="flex xl:hidden items-center gap-3">
-          <button
-            onClick={() => handleLinkClick('donate')}
-            className="px-3 py-1.5 bg-stone-950 text-white rounded text-[10px] font-bold tracking-widest uppercase cursor-pointer"
-          >
-            CONTRIBUTE
-          </button>
-
           <button
             onClick={() => setMenuOpen(!menuOpen)}
             className="px-4 py-2 border border-stone-300 rounded font-mono text-[10px] uppercase tracking-widest text-stone-800 hover:bg-stone-100 transition-colors cursor-pointer"
@@ -104,7 +81,7 @@ export default function Navbar({
       {menuOpen && (
         <div className="absolute top-full left-0 right-0 bg-white border-b border-stone-200 shadow-xl z-50 animate-fadeIn">
           <div className="p-6 space-y-4">
-            <span className="block font-mono text-[9px] uppercase tracking-[0.2em] text-stone-400 font-bold border-b border-stone-100 pb-2">
+            <span className="block font-mono text-[9px] uppercase tracking-[0.2em] text-stone-400 font-bold border-b border-stone-100 pb-2 text-left font-semibold">
               DIRECTORY PAGES
             </span>
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 text-left">
@@ -124,15 +101,6 @@ export default function Navbar({
                   </button>
                 );
               })}
-            </div>
-            
-            <div className="pt-2">
-              <button
-                onClick={() => handleLinkClick('donate')}
-                className="w-full py-3 bg-stone-950 hover:bg-stone-900 text-white rounded text-center text-xs font-bold tracking-widest uppercase cursor-pointer"
-              >
-                SECURE CONTRIBUTION CENTRE
-              </button>
             </div>
           </div>
         </div>

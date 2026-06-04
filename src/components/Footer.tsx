@@ -25,7 +25,7 @@ export default function Footer({ onNavigate, currency, onSetCurrency }: FooterPr
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
         {/* Main Grid Columns */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 pb-12 border-b border-stone-850">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-12 pb-12 border-b border-stone-850">
           
           {/* Column 1: Monogram & Bio */}
           <div className="space-y-4 text-left">
@@ -75,31 +75,6 @@ export default function Footer({ onNavigate, currency, onSetCurrency }: FooterPr
                 </li>
               ))}
             </ul>
-          </div>
-
-          {/* Column 3: Regional Field Contacts */}
-          <div className="space-y-4 text-left">
-            <h3 className="text-white text-[10px] font-bold uppercase tracking-widest font-mono">
-              Regional Operations HQ
-            </h3>
-            <div className="space-y-3.5 text-xs text-stone-400 font-mono">
-              <div className="space-y-1">
-                <span className="block text-stone-500 font-bold">[MAP // COORD A-1]</span>
-                <p className="font-sans font-light text-stone-300">
-                  <strong>East Africa HQ:</strong> ThriveKids Towers, Ngong Road, Nairobi, Kenya
-                </p>
-              </div>
-              <div className="space-y-1">
-                <span className="block text-stone-500 font-bold">[MAP // COORD B-4]</span>
-                <p className="font-sans font-light text-stone-300">
-                  <strong>Global Trust Center:</strong> 24 Old Broad Street, London EC2N 1HQ, UK
-                </p>
-              </div>
-              <div>
-                <span className="block text-stone-400">PHN: +44 207 946 0192</span>
-                <span className="block text-stone-400 mt-1">EML: liaison@thrivekidsglobal.org</span>
-              </div>
-            </div>
           </div>
 
           {/* Column 4: Newsletter & Localization Settings */}

@@ -444,16 +444,6 @@ export const GEOGRAPHIC_IMPACT = [
     clatitude: 65,
     clongitude: 28,
     mainFocus: 'Mothers Micro-Loans, Psychological Counseling & Emergency Storm Haven services.'
-  },
-  {
-    id: 'central_asia',
-    region: 'Central & Eastern Europe Outposts',
-    schoolsSupported: 18,
-    childrenSupported: '15,000+',
-    boreholesBuilt: 0,
-    clatitude: 28,
-    clongitude: 60,
-    mainFocus: 'War and Refugee Education, Orphan Counseling & Family Rehabilitation.'
   }
 ];
 
