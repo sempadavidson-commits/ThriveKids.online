@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
 import { Program } from '../types';
-import { ArrowRight, ShieldCheck, Activity, Target, Compass, Globe } from 'lucide-react';
+import { ArrowRight, ShieldCheck, Activity, Target, Compass, Globe, Leaf, Trophy, Music } from 'lucide-react';
 
 interface ProgramIdentitiesProps {
   programs: Program[];
@@ -18,6 +18,9 @@ export default function ProgramIdentities({ programs, initialSelectedId = 'educa
     if (id === 'health') return <Activity className="w-5 h-5 text-emerald-500" />;
     if (id === 'protection') return <ShieldCheck className="w-5 h-5 text-amber-500" />;
     if (id === 'family') return <Target className="w-5 h-5 text-rose-500" />;
+    if (id === 'conservation') return <Leaf className="w-5 h-5 text-teal-600" />;
+    if (id === 'sports') return <Trophy className="w-5 h-5 text-amber-600 animate-bounce-slow" />;
+    if (id === 'creative') return <Music className="w-5 h-5 text-indigo-600" />;
     return <Globe className="w-5 h-5 text-indigo-500" />;
   };
 
@@ -26,7 +29,10 @@ export default function ProgramIdentities({ programs, initialSelectedId = 'educa
     health: 'Sector 02 — Medical',
     protection: 'Sector 03 — Safeguarding',
     family: 'Sector 04 — Livelihoods',
-    community: 'Sector 05 — Infrastructure'
+    community: 'Sector 05 — Infrastructure',
+    conservation: 'Sector 06 — Conservation',
+    sports: 'Sector 07 — Youth Sports',
+    creative: 'Sector 08 — Arts & Startups'
   };
 
   return (

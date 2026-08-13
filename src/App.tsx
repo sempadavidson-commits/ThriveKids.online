@@ -46,7 +46,6 @@ import UrgentCampaign from './components/UrgentCampaign';
 import ProgramIdentities from './components/ProgramIdentities';
 import TransparencyCalculator from './components/TransparencyCalculator';
 import MilestoneTimeline from './components/MilestoneTimeline';
-import ChildSponsorshipHub, { ChildProfile } from './components/ChildSponsorshipHub';
 import TrustReports from './components/TrustReports';
 import InteractiveMap from './components/InteractiveMap';
 import ParallaxStory from './components/ParallaxStory';
@@ -103,10 +102,7 @@ export default function App() {
   const [currency, setCurrency] = useState<string>('USD');
 
   // Local Storage and Runtime Database Store
-  const [programsStore] = useState<Program[]>(() => {
-    const saved = localStorage.getItem('tk_db_programs');
-    return saved ? JSON.parse(saved) : INITIAL_PROGRAMS;
-  });
+  const [programsStore] = useState<Program[]>(INITIAL_PROGRAMS);
 
   const [teamStore] = useState<TeamMember[]>(() => {
     const saved = localStorage.getItem('tk_db_team');
@@ -227,16 +223,6 @@ export default function App() {
       'success',
       'Pledge Recorded & Docketed',
       `${currency} ${amount} has been registered to ${note}. A confirmation receipt has been dispatched.`
-    );
-  };
-
-  // Child Sponsorship pledge
-  const handleSponsorChild = (child: ChildProfile) => {
-    handlePledgeGeneral(child.monthlyCost, `1-to-1 Child Sponsorship for ${child.name} (Monthly)`);
-    triggerToast(
-      'success',
-      `Sponsorship Active for ${child.name}`,
-      `You are now pledged to support ${child.name} in ${child.region}. Quarterly academic updates will be delivered.`
     );
   };
 
@@ -389,59 +375,6 @@ export default function App() {
               <ImpactMarquee />
             </div>
 
-            {/* CHILD SPONSORSHIP PREVIEW TEASER */}
-            <div id="sponsorship-teaser" className="bg-stone-900 text-white py-16 px-6 text-center">
-              <div className="max-w-4xl mx-auto space-y-6">
-                <span className="text-emerald-400 font-mono text-xs uppercase tracking-widest font-bold block">
-                  STAND DIRECTLY WITH A CHILD
-                </span>
-                <h2 className="text-3xl sm:text-4xl font-bold tracking-tight">
-                  Over 2,400 Children Currently Awaiting Verified Sponsors
-                </h2>
-                <p className="text-stone-300 text-sm sm:text-base font-light max-w-xl mx-auto">
-                  For $35/month, provide complete school tuition, nutritious daily meals, and medical clinic checks.
-                </p>
-                <div className="pt-2 flex flex-col sm:flex-row items-center justify-center gap-3">
-                  <button
-                    type="button"
-                    onClick={() => handleNavigate('sponsor')}
-                    className="w-full sm:w-auto px-8 py-4 bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-xs uppercase tracking-wider rounded-xl shadow-lg transition-all cursor-pointer inline-flex items-center justify-center gap-2"
-                  >
-                    <Heart className="w-4 h-4 fill-white" />
-                    <span>Explore Children Profiles</span>
-                  </button>
-
-                  <a
-                    href="https://wa.me/256746036194?text=Hello%20ThriveKids%20Foundation%2C%20I%20would%20like%20to%20learn%20more%20about%20sponsoring%20a%20child."
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="w-full sm:w-auto px-6 py-4 bg-[#25D366]/20 hover:bg-[#25D366] text-[#25D366] hover:text-white border border-[#25D366]/40 font-bold text-xs uppercase tracking-wider rounded-xl transition-all inline-flex items-center justify-center gap-2"
-                  >
-                    <svg className="w-4 h-4 fill-current" viewBox="0 0 24 24">
-                      <path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.893 11.892-1.99-.001-3.951-.5-5.688-1.448l-6.305 1.654zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884-.001 2.225.651 3.891 1.746 5.634l-.999 3.648 3.742-.981zm11.387-5.464c-.074-.124-.272-.198-.57-.347-.297-.149-1.758-.868-2.031-.967-.272-.099-.47-.149-.669.149-.198.297-.768.967-.941 1.165-.173.198-.347.223-.644.074-.297-.149-1.255-.462-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.297-.347.446-.521.151-.172.2-.296.3-.495.099-.198.05-.372-.025-.521-.075-.148-.669-1.611-.916-2.206-.242-.579-.487-.501-.669-.51l-.57-.01c-.198 0-.52.074-.792.372s-1.04 1.016-1.04 2.479 1.065 2.876 1.213 3.074c.149.198 2.095 3.2 5.076 4.487.709.306 1.263.489 1.694.626.712.226 1.36.194 1.872.118.571-.085 1.758-.719 2.006-1.413.248-.695.248-1.29.173-1.414z"/>
-                    </svg>
-                    <span>WhatsApp: +256746036194</span>
-                  </a>
-                </div>
-
-                <div className="pt-4 flex flex-wrap justify-center items-center gap-4 text-xs font-mono text-stone-400">
-                  <div className="flex items-center gap-1.5">
-                    <span className="text-stone-500">Contact:</span>
-                    <a href="tel:+256746036194" className="text-white hover:text-emerald-400 transition-colors font-bold">+256746036194</a>
-                  </div>
-                  <span>•</span>
-                  <a 
-                    href="https://www.tiktok.com/@thrivekidsfoundation" 
-                    target="_blank" 
-                    rel="noopener noreferrer" 
-                    className="hover:text-white text-stone-300 transition-colors"
-                  >
-                    TikTok Field Videos
-                  </a>
-                </div>
-              </div>
-            </div>
-
           </div>
         )}
 
@@ -454,10 +387,10 @@ export default function App() {
                   CORE OPERATIONAL SECTORS
                 </span>
                 <h1 className="text-4xl sm:text-5xl font-extrabold tracking-tight">
-                  Our Five Strategic Initiatives
+                  Strategic Focus Areas &amp; Pillars
                 </h1>
-                <p className="max-w-xl mx-auto text-sm text-stone-300 font-light">
-                  From solar computer labs to mother-led agricultural cooperatives, explore our verified programs in detail.
+                <p className="max-w-2xl mx-auto text-sm text-stone-300 font-light">
+                  From eco-classrooms built of recycled plastic bottles to chimpanzee sanctuaries, sports tournaments, and free cataract clinics, explore our verified programs in detail.
                 </p>
               </div>
             </section>
@@ -516,25 +449,22 @@ export default function App() {
           </div>
         )}
 
-        {/* VIEW 5: CHILD SPONSORSHIP & GET INVOLVED */}
+        {/* VIEW 5: GET INVOLVED & PARTNERSHIPS */}
         {currentPath === 'sponsor' && (
           <div className="space-y-16 pb-24">
             <section className="bg-stone-900 text-white py-16 px-6 text-center">
               <div className="max-w-4xl mx-auto space-y-4">
-                <span className="text-amber-400 font-mono text-xs uppercase tracking-widest font-bold">
-                  1-TO-1 HUMAN CONNECTION
+                <span className="text-emerald-400 font-mono text-xs uppercase tracking-widest font-bold">
+                  JOIN OUR MISSION
                 </span>
                 <h1 className="text-4xl sm:text-5xl font-extrabold tracking-tight">
-                  Sponsor a Child &amp; Get Involved
+                  Get Involved &amp; Partner
                 </h1>
                 <p className="max-w-xl mx-auto text-sm text-stone-300 font-light">
-                  Choose a vulnerable child to sponsor, apply as a specialist volunteer, or propose a corporate grant alliance.
+                  Apply as a specialist volunteer, or propose a corporate grant alliance to directly support vulnerable youth.
                 </p>
               </div>
             </section>
-
-            {/* Child Sponsorship Section */}
-            <ChildSponsorshipHub onSponsor={handleSponsorChild} />
 
             {/* Volunteer & Corporate Alliances Forms */}
             <div className="max-w-7xl mx-auto px-6 space-y-12">

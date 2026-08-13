@@ -85,24 +85,6 @@ export default function HeroSection({ onExplore, onDonateClick, onUrgentClick }:
       {/* Center Content Stage */}
       <div className="relative z-20 max-w-4xl mx-auto text-center space-y-8">
         
-        {/* Urgent Campaign Pill */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8 }}
-          className="inline-block"
-        >
-          <button
-            type="button"
-            onClick={onUrgentClick}
-            className="inline-flex items-center gap-2 px-4 py-1.5 bg-amber-500/20 hover:bg-amber-500/30 border border-amber-500/40 rounded-full text-amber-300 text-xs font-mono font-bold tracking-wider transition-all cursor-pointer shadow-lg"
-          >
-            <span className="w-2 h-2 rounded-full bg-amber-400 animate-ping" />
-            <span>URGENT: Winter &amp; Seasonal Nutrition Relief Active</span>
-            <ChevronRight className="w-3.5 h-3.5" />
-          </button>
-        </motion.div>
-
         {/* Main Headline */}
         <motion.div
           initial={{ opacity: 0, y: 30 }}
@@ -143,27 +125,6 @@ export default function HeroSection({ onExplore, onDonateClick, onUrgentClick }:
             <span>Explore Living Initiatives</span>
             <ArrowRight className="w-4 h-4" />
           </button>
-        </motion.div>
-
-        {/* Reassuring Badges */}
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ duration: 1, delay: 0.7 }}
-          className="flex flex-wrap justify-center items-center gap-6 pt-6 text-xs text-stone-400 font-mono"
-        >
-          <div className="flex items-center gap-1.5">
-            <ShieldCheck className="w-4 h-4 text-emerald-400" />
-            <span>501(c)(3) / UK Charity Certified</span>
-          </div>
-          <div className="flex items-center gap-1.5">
-            <Award className="w-4 h-4 text-amber-400" />
-            <span>GuideStar Platinum Transparency</span>
-          </div>
-          <div className="flex items-center gap-1.5">
-            <Users className="w-4 h-4 text-emerald-400" />
-            <span>232K+ Verified Beneficiaries</span>
-          </div>
         </motion.div>
 
       </div>

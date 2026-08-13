@@ -17,31 +17,31 @@ import {
 export const INITIAL_PROGRAMS: Program[] = [
   {
     id: 'education',
-    title: 'Education Support',
-    slug: 'education-support',
+    title: 'Education & Scholar Grants',
+    slug: 'education-scholar-grants',
     iconName: 'GraduationCap',
-    shortDescription: 'Providing tuition scholarships, vital school supplies, tutoring circles, and building literacy labs for vulnerable children.',
-    fullDescription: 'Education is the ultimate equalizer and the foundation for long-term self-sufficiency. Our Education Support initiative addresses structural barriers limiting schooling. By establishing scholarships, delivering uniform packages, equipping schools with clean water facilities, and building modern container libraries, we guarantee children have the safety and environment they need to excel.',
+    shortDescription: 'Providing school fees scholarships, building eco-classrooms using recycled plastic bottles, and sponsoring exceptionally talented children.',
+    fullDescription: 'Education is the ultimate equalizer and a core pillar of our strategy. In alignment with the Ruparelia Foundation model, our Education Support initiative reduces dropout rates by distributing scholarships, supporting school fees, renovating school structures, and constructing innovative eco-classrooms and sanitation blocks built entirely of recycled plastic bottles in underserved urban communities.',
     objectives: [
-      'Eliminate financial drop-out threats by distributing direct tuition scholarships.',
-      'Construct and furnish community literacy hubs equipped with primary and secondary curricula.',
-      'Provide specialized after-school tutoring for children lagging behind peer benchmarks.',
-      'Train local educators in specialized neurodivergent and trauma-informed instruction.'
+      'Eliminate financial dropout risks through direct scholar tuition grants and school fees support.',
+      'Construct classrooms and sanitation structures using recycled plastic bottles in high-density areas.',
+      'Construct and furnish community literacy hubs equipped with regional and digital curricula.',
+      'Host vocational training programs to equip school-leavers with practical trades and digital skills.'
     ],
     keyOutcomes: [
-      'Successfully subsidized 1,420 vulnerable children over the past calendar fiscal cycle.',
-      'Maintained a verified 94.2% primary school completion rate among target cohorts.',
-      'Constructed and commissioned 18 fully solar-powered school computer labs.',
-      'Achieved a measurable 42% average improvement in reading grade levels.'
+      'Successfully subsidized 2,420 vulnerable students over the past calendar fiscal cycle.',
+      'Constructed 4 innovative eco-classrooms using 150,000 recycled plastic bottles.',
+      'Maintained a verified 95.8% school retention rate among target scholarship cohorts.',
+      'Distributed uniform packages and school books to 12,500 children.'
     ],
-    targetBeneficiaries: 'Socioeconomically isolated or orphaned school-age children (Ages 5-18).',
+    targetBeneficiaries: 'Socioeconomically vulnerable youth, outstanding young scholars, and children in slum communities (Ages 5-18).',
     image: 'https://images.unsplash.com/photo-1503676260728-1c00da094a0b?auto=format&fit=crop&q=80&w=1200',
     stats: [
-      { label: 'Scholarships Funded', value: '1,420+' },
-      { label: 'Literacy Labs Built', value: '45' },
-      { label: 'Completion Rate', value: '94.2%' }
+      { label: 'Scholarships Funded', value: '2,420+' },
+      { label: 'Eco-Structures Built', value: '6' },
+      { label: 'Retention Rate', value: '95.8%' }
     ],
-    impactStory: 'Education Support empowered Amina to become her village\'s first female university applicant, transforming local views on female scholarship.'
+    impactStory: 'By securing scholar fees and building the plastic bottle library in her slum sector, we empowered Amina to become her school group\'s top scholar.'
   },
   {
     id: 'protection',
@@ -101,31 +101,31 @@ export const INITIAL_PROGRAMS: Program[] = [
   },
   {
     id: 'health',
-    title: 'Health & Nutrition',
-    slug: 'health-nutrition',
+    title: 'Healthcare & Mobile Medical Camps',
+    slug: 'healthcare-mobile-medical-camps',
     iconName: 'Activity',
-    shortDescription: 'Eradicating young child malnourishment through therapeutic feeding, vital immunization, and hygiene education.',
-    fullDescription: 'Proper cognitive development and physical vitality require foundational nutrition and safety from disease. We integrate severe malnourishment medical wings at rural outposts, supply high-protein peanut pastes to starving children, secure critical pediatric vaccines, deploy mobile clinics, and construct clean sanitation blocks to reduce waterborne threats.',
+    shortDescription: 'Running free healthcare camps (cataract surgery, eye screenings, spectacles), contributing to medical bills, and donating prosthetic legs.',
+    fullDescription: 'Good health is foundational for developmental growth and prosperous communities. Drawing inspiration from the Ruparelia Foundation, we organize free neighborhood health camps featuring eye screenings, free glasses distribution, and cataract surgeries. Additionally, we renovate local medical wards, contribute toward crucial hospital equipment, and distribute custom prosthetic legs to restore mobility to disabled community members.',
     objectives: [
-      'Operate pediatric clinics and deploy mobile health vans to remote or inaccessible sectors.',
-      'Provide high-protein peanut pastes (RUTF) to severe acutely malnourished infants.',
-      'Conduct neighborhood classes on sanitation, clean water filtration, and pediatric health.',
-      'Coordinate child immunization programs to protect against pediatric infectious diseases.'
+      'Organize comprehensive community health camps providing cataract operations, eye care, and glasses.',
+      'Support families with emergency financial aid to settle outstanding intensive medical bills.',
+      'Partner with hospital units to support pediatric ward renovations and donate medical equipment.',
+      'Procure and distribute prosthetic legs and mobility aids to disabled youth and adults.'
     ],
     keyOutcomes: [
-      'Recovered 18,200 severe acutely malnourished toddlers from terminal health risks.',
-      'Distributed 3.2 million balanced nutrient dinners to community schools.',
-      'Supplied clean, filtered drinking water arrays to over 240 target villages.',
-      'Administered routine immunizations and health checks to 115,000 children.'
+      'Conducted 8 free health camps, providing eye screenings and free spectacles to 8,400 patients.',
+      'Directly sponsored 125 successful sight-restoring cataract surgeries.',
+      'Donated custom prosthetic limbs to 42 children and adults, restoring their mobility.',
+      'Contributed equipment and supplies to renovate 3 major regional pediatric clinics.'
     ],
-    targetBeneficiaries: 'Toddlers, pregnant/lactating women in rural clinics, and areas facing nutritional scarcity.',
+    targetBeneficiaries: 'Disabled individuals, impoverished patients requiring sight surgeries, and marginalized communities without healthcare access.',
     image: 'https://images.unsplash.com/photo-1509099836639-18ba1795216d?auto=format&fit=crop&q=80&w=1200',
     stats: [
-      { label: 'Toddlers Treated', value: '18.2K' },
-      { label: 'School Dinners', value: '3.2M' },
-      { label: 'Clean Water Outlets', value: '240+' }
+      { label: 'Eye Patients Screened', value: '8,400+' },
+      { label: 'Cataract Surgeries', value: '125' },
+      { label: 'Prosthetic Limbs Donated', value: '42' }
     ],
-    impactStory: 'Our clean water arrays eliminated waterborne cholera in the Kajiado district, dropping regional infant clinic visits by 80%.'
+    impactStory: 'Following our free community medical camp, elderly Jajja received sight-restoring cataract surgery, enabling her to safely care for her school-age grandchildren.'
   },
   {
     id: 'community',
@@ -154,6 +154,90 @@ export const INITIAL_PROGRAMS: Program[] = [
       { label: 'Trained Mechanics', value: '450' }
     ],
     impactStory: 'Drilling the solar well saved girls from walking 8 miles for water daily, immediately raising girls\' school attendance by 93%.'
+  },
+  {
+    id: 'conservation',
+    title: 'Wildlife & Environment Conservation',
+    slug: 'wildlife-environment-conservation',
+    iconName: 'Leaf',
+    shortDescription: 'Preserving natural habitats, collaborating with chimpanzee sanctuaries (Ngamba Island), funding animal feeds, and acquiring habitat land.',
+    fullDescription: 'Our environment and natural heritage are directly linked to community livelihoods. In alignment with the Ruparelia Foundation model, we partner with specialized wildlife sanctuaries (including the Ngamba Island Chimpanzee Sanctuary) to fund veterinary operations, secure wildlife corridors via strategic land acquisitions, feed rescued chimpanzees, and drive reforestation projects.',
+    objectives: [
+      'Provide core funding for chimpanzee feeding, nutrition, and rehabilitation in protected sanctuaries.',
+      'Sponsor community-led tree planting campaigns to restore native high-altitude rainforest borders.',
+      'Coordinate with regional wildlife authorities to protect endangered species and natural habitats.',
+      'Equip school-age youth clubs with conservation knowledge through guided sanctuary field programs.'
+    ],
+    keyOutcomes: [
+      'Directly funded chimpanzee nutrition and medical care for 52 rescued primates at Ngamba Island.',
+      'Acquired and legally designated 120 acres of high-biodiversity corridor woodland.',
+      'Planted 85,000 indigenous trees across degraded water catchment buffer areas.',
+      'Engaged 6,400 students in active outdoor conservation learning networks.'
+    ],
+    targetBeneficiaries: 'Endangered animal species, protected conservation sanctuaries, and communities bordering wilderness zones.',
+    image: 'https://images.unsplash.com/photo-1547471080-7cc2caa01a7e?auto=format&fit=crop&q=80&w=1200',
+    stats: [
+      { label: 'Primates Cared For', value: '52' },
+      { label: 'Habitat Acres Secured', value: '120' },
+      { label: 'Trees Planted', value: '85K' }
+    ],
+    impactStory: 'Secured veterinary critical care and food supplies for orphaned chimps, safeguarding vital East African primate biodiversity.'
+  },
+  {
+    id: 'sports',
+    title: 'Sports & Youth Talents',
+    slug: 'sports-youth-talents',
+    iconName: 'Trophy',
+    shortDescription: 'Supporting and organizing community sports initiatives, soccer tournaments, annual charity marathons, and coaching pathways.',
+    fullDescription: 'Sports serve as a powerful catalyst for teamwork, self-discipline, and community mobilization. Our Sports & Youth Talents sector sponsors region-wide charity marathons, establishes local soccer academies, supplies equipment to underserved schools, and hosts soccer tournaments to foster youth leadership and drive positive development.',
+    objectives: [
+      'Organize and host annual community-wide charity marathons to raise development awareness.',
+      'Establish school sports leagues and equip vulnerable rural schools with complete sporting gear.',
+      'Sponsor coaching pathways for high-potential players to qualify for professional leagues.',
+      'Build localized sports courts and recreational structures in high-density urban areas.'
+    ],
+    keyOutcomes: [
+      'Facilitated 12 major youth football tournaments with over 4,800 active competitors.',
+      'Distributed professional-grade athletic kits to 75 underserved regional schools.',
+      'Enrolled 310 high-potential adolescent athletes in elite skill mentoring programs.',
+      'Sponsored 4 annual fundraising marathons, raising critical local social project funds.'
+    ],
+    targetBeneficiaries: 'Adolescent youth, village community sports clubs, and school athletic initiatives.',
+    image: 'https://images.unsplash.com/photo-1517649763962-0c623066013b?auto=format&fit=crop&q=80&w=1200',
+    stats: [
+      { label: 'Tournament Players', value: '4.8K+' },
+      { label: 'Schools Equipped', value: '75' },
+      { label: 'Charity Marathons', value: '4' }
+    ],
+    impactStory: 'Our annual football tournament provided a clear constructive pathway for local youth, fostering district pride and reducing neighborhood dropouts.'
+  },
+  {
+    id: 'creative',
+    title: 'Creative Arts & Youth Startups',
+    slug: 'creative-arts-youth-startups',
+    iconName: 'Music',
+    shortDescription: 'Nurturing young artistic talents, establishing community music recording studios, and fueling innovative startup micro-grants.',
+    fullDescription: 'Underprivileged youth possess incredible untapped creative and entrepreneurial potential. Our Creative Arts & Youth Startups program provides equipment, coaching, and a professional-grade music recording studio for talented youth. Combined with startup incubation resources, seed grants, and digital skill bootcamps, we support young creators and tech-driven builders in turning talent into sustainable livelihoods.',
+    objectives: [
+      'Run a free-to-use neighborhood recording studio with mixing consoles for young musicians.',
+      'Host artistic showcases and talent search events to connect youth with professional managers.',
+      'Sponsor startup incubation bootcamps focusing on practical digital marketing and e-commerce.',
+      'Distribute creative startup seed grants to help young artists establish independent studios.'
+    ],
+    keyOutcomes: [
+      'Produced and mastered original tracks for 145 emerging local youth artists.',
+      'Awarded 62 startup seed micro-grants to youth-led digital and craft ventures.',
+      'Facilitated professional arts and audio engineering internships for 80 young creators.',
+      'Maintained an active community talent hub supporting digital and practical design projects.'
+    ],
+    targetBeneficiaries: 'Underprivileged young musicians, digital artists, local craftsmen, and youth entrepreneurs.',
+    image: 'https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?auto=format&fit=crop&q=80&w=1200',
+    stats: [
+      { label: 'Artists Recorded', value: '145' },
+      { label: 'Startup Grants', value: '62' },
+      { label: 'Vocational Interns', value: '80' }
+    ],
+    impactStory: 'Through our free studio access and recording mentorship, young artist Ronnie produced his debut track, gaining local radio exposure and a creative career.'
   }
 ];
 
