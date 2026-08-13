@@ -1,8 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
+import { ArrowRight, ShieldCheck, Heart, Sparkles, ChevronRight, Globe, Users, Award } from 'lucide-react';
 
 interface HeroSectionProps {
   onExplore: () => void;
+  onDonateClick: () => void;
+  onUrgentClick: () => void;
 }
 
 const HERO_IMAGES = [
@@ -12,147 +15,159 @@ const HERO_IMAGES = [
   'https://images.unsplash.com/photo-1509099836639-18ba1795216d?auto=format&fit=crop&q=80&w=1920'
 ];
 
-export default function HeroSection({ onExplore }: HeroSectionProps) {
+export default function HeroSection({ onExplore, onDonateClick, onUrgentClick }: HeroSectionProps) {
   const [currentIdx, setCurrentIdx] = useState(0);
 
   useEffect(() => {
     const timer = setInterval(() => {
       setCurrentIdx((prev) => (prev + 1) % HERO_IMAGES.length);
-    }, 7000);
+    }, 6500);
     return () => clearInterval(timer);
   }, []);
 
   return (
-    <section className="relative h-screen w-full bg-stone-950 overflow-hidden flex items-center justify-center">
+    <section className="relative min-h-[92vh] w-full bg-stone-950 overflow-hidden flex items-center justify-center py-20 px-6 sm:px-10 lg:px-16">
+      
       {/* Background Cinematic Crossfader Slider */}
       <div className="absolute inset-0 z-0">
         <AnimatePresence mode="wait">
           <motion.div
             key={currentIdx}
-            initial={{ opacity: 0, scale: 1.05 }}
-            animate={{ opacity: 0.35, scale: 1 }}
+            initial={{ opacity: 0, scale: 1.06 }}
+            animate={{ opacity: 0.38, scale: 1 }}
             exit={{ opacity: 0 }}
-            transition={{ duration: 2.5, ease: 'easeOut' }}
+            transition={{ duration: 2.2, ease: 'easeOut' }}
             className="absolute inset-0 bg-cover bg-center"
             style={{ backgroundImage: `url(${HERO_IMAGES[currentIdx]})` }}
           />
         </AnimatePresence>
-        {/* Real-time deep vignette overlay */}
-        <div className="absolute inset-0 bg-radial-vignette from-transparent via-stone-950/80 to-stone-950"></div>
-        <div className="absolute inset-0 bg-gradient-to-t from-stone-950 via-transparent to-stone-950/40"></div>
+        {/* Soft Vignette Overlay */}
+        <div className="absolute inset-0 bg-gradient-to-t from-stone-950 via-stone-950/60 to-stone-950/80" />
+        <div className="absolute inset-0 bg-radial from-transparent via-stone-950/40 to-stone-950" />
       </div>
 
-      {/* Floating Statistics - Floating Orbits without generic icons */}
-      <div className="absolute inset-0 z-10 pointer-events-none hidden md:block">
-        {/* Floating stat 1 */}
+      {/* Floating Field Metrics (Desktop view) */}
+      <div className="absolute inset-0 z-10 pointer-events-none hidden xl:block">
+        {/* Metric 1 */}
         <motion.div
-          animate={{
-            y: [0, -18, 0],
-            x: [0, 10, 0],
-          }}
-          transition={{
-            duration: 9,
-            repeat: Infinity,
-            ease: "easeInOut"
-          }}
-          className="absolute top-1/4 left-[10%] bg-stone-900/80 backdrop-blur-xl border border-stone-800 p-4 rounded-xl text-left"
+          animate={{ y: [0, -12, 0] }}
+          transition={{ duration: 7, repeat: Infinity, ease: 'easeInOut' }}
+          className="absolute top-28 left-[6%] bg-stone-900/90 backdrop-blur-md border border-stone-800 p-4 rounded-xl text-left shadow-2xl"
         >
-          <span className="block text-[10px] font-mono uppercase tracking-widest text-[#10b981]">REGIONAL REACH</span>
-          <span className="block text-xl font-bold font-display text-white mt-0.5">395 DISTRICTS</span>
-          <span className="block text-[11px] text-stone-400 mt-1">Direct community involvement</span>
+          <span className="block text-[10px] font-mono uppercase tracking-widest text-emerald-400 font-bold">VERIFIED REACH</span>
+          <span className="block text-2xl font-bold font-mono text-white mt-0.5">395 DISTRICTS</span>
+          <span className="block text-[11px] text-stone-400 mt-0.5">East Africa • S. Asia • Latin America</span>
         </motion.div>
 
-        {/* Floating stat 2 */}
+        {/* Metric 2 */}
         <motion.div
-          animate={{
-            y: [0, 24, 0],
-            x: [0, -14, 0],
-          }}
-          transition={{
-            duration: 11,
-            repeat: Infinity,
-            ease: "easeInOut",
-            delay: 1.5
-          }}
-          className="absolute bottom-1/4 right-[8%] bg-stone-900/80 backdrop-blur-xl border border-stone-800 p-4 rounded-xl text-left"
+          animate={{ y: [0, 14, 0] }}
+          transition={{ duration: 8.5, repeat: Infinity, ease: 'easeInOut', delay: 1 }}
+          className="absolute bottom-28 right-[6%] bg-stone-900/90 backdrop-blur-md border border-stone-800 p-4 rounded-xl text-left shadow-2xl"
         >
-          <span className="block text-[10px] font-mono uppercase tracking-widest text-[#f59e0b]">COGNITIVE PROTECTION</span>
-          <span className="block text-xl font-bold font-display text-white mt-0.5">215,050 CHILDREN</span>
-          <span className="block text-[11px] text-stone-400 mt-1">Enrolled and verified</span>
+          <span className="block text-[10px] font-mono uppercase tracking-widest text-amber-400 font-bold">LIVES IMPACTED</span>
+          <span className="block text-2xl font-bold font-mono text-white mt-0.5">232,000+ CHILDREN</span>
+          <span className="block text-[11px] text-stone-400 mt-0.5">Continuous healthcare &amp; education</span>
         </motion.div>
 
-        {/* Floating stat 3 */}
+        {/* Metric 3 */}
         <motion.div
-          animate={{
-            y: [0, -20, 0],
-            x: [0, -10, 0],
-          }}
-          transition={{
-            duration: 13,
-            repeat: Infinity,
-            ease: "easeInOut",
-            delay: 3
-          }}
-          className="absolute top-1/3 right-[15%] bg-stone-900/80 backdrop-blur-xl border border-stone-800 p-4 rounded-xl text-left"
+          animate={{ y: [0, -10, 0] }}
+          transition={{ duration: 9, repeat: Infinity, ease: 'easeInOut', delay: 2 }}
+          className="absolute top-36 right-[8%] bg-stone-900/90 backdrop-blur-md border border-stone-800 p-4 rounded-xl text-left shadow-2xl"
         >
-          <span className="block text-[10px] font-mono uppercase tracking-widest text-[#10b981]">AUDITED TRANSPARENCY</span>
-          <span className="block text-xl font-bold font-display text-white mt-0.5">87.2% DIRECT FUNDS</span>
-          <span className="block text-[11px] text-stone-400 mt-1">Strict fieldwork expenditure</span>
+          <span className="block text-[10px] font-mono uppercase tracking-widest text-emerald-400 font-bold">DIRECT FIELD FLOW</span>
+          <span className="block text-2xl font-bold font-mono text-white mt-0.5">87.2% ALLOCATED</span>
+          <span className="block text-[11px] text-stone-400 mt-0.5">Audited quarterly by certified CPAs</span>
         </motion.div>
       </div>
 
-      {/* Main Content Details */}
-      <div className="relative z-20 max-w-5xl mx-auto px-6 text-center space-y-8">
+      {/* Center Content Stage */}
+      <div className="relative z-20 max-w-4xl mx-auto text-center space-y-8">
+        
+        {/* Urgent Campaign Pill */}
         <motion.div
-          initial={{ opacity: 0, y: 30 }}
+          initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 1.2, ease: 'easeOut' }}
-          className="space-y-4"
-        >
-          <span className="inline-block font-mono text-[10px] uppercase tracking-[0.3em] text-[#10b981] font-bold">
-            THRIVEKIDS HUMANITARIAN ACTION
-          </span>
-          <h1 className="font-editorial italic text-stone-100 text-4xl sm:text-6xl lg:text-7xl leading-tight font-normal tracking-tight">
-            “Every Child Deserves A Future <br className="hidden sm:inline" />
-            Full Of Possibilities.”
-          </h1>
-          <p className="max-w-2xl mx-auto font-sans text-stone-300 text-base sm:text-lg font-light leading-relaxed">
-            We operate outside the boundaries of conventional charities. By crafting asymmetrical educational, 
-            clinical, and safeguarding initiatives, we co-create self-governing sanctuaries in the world’s most vulnerable regions.
-          </p>
-        </motion.div>
-
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ delay: 0.8, duration: 1 }}
-          className="flex flex-col sm:flex-row justify-center items-center gap-4 pt-4"
+          transition={{ duration: 0.8 }}
+          className="inline-block"
         >
           <button
-            onClick={onExplore}
-            className="w-full sm:w-auto px-8 py-4 bg-white hover:bg-stone-100 text-stone-950 font-sans font-bold text-xs uppercase tracking-widest transition-all rounded-sm shadow-xl hover:shadow-2xl cursor-pointer"
+            type="button"
+            onClick={onUrgentClick}
+            className="inline-flex items-center gap-2 px-4 py-1.5 bg-amber-500/20 hover:bg-amber-500/30 border border-amber-500/40 rounded-full text-amber-300 text-xs font-mono font-bold tracking-wider transition-all cursor-pointer shadow-lg"
           >
-            Explore Living Narrative
+            <span className="w-2 h-2 rounded-full bg-amber-400 animate-ping" />
+            <span>URGENT: Winter &amp; Seasonal Nutrition Relief Active</span>
+            <ChevronRight className="w-3.5 h-3.5" />
           </button>
         </motion.div>
 
-        {/* Scroll hint line */}
+        {/* Main Headline */}
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 1, delay: 0.2 }}
+          className="space-y-5"
+        >
+          <h1 className="text-4xl sm:text-6xl lg:text-7xl font-extrabold tracking-tight text-white leading-tight">
+            Every Child Deserves A Future Full Of Possibilities.
+          </h1>
+          
+          <p className="max-w-2xl mx-auto text-stone-300 text-base sm:text-lg font-light leading-relaxed">
+            We provide deep multi-sector support: building solar-powered schools, deploying mobile pediatric clinics, drilling clean water boreholes, and protecting children from exploitation.
+          </p>
+        </motion.div>
+
+        {/* Action Buttons */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 1, delay: 0.4 }}
+          className="flex flex-col sm:flex-row justify-center items-center gap-4 pt-2"
+        >
+          <button
+            type="button"
+            onClick={onDonateClick}
+            className="w-full sm:w-auto px-8 py-4 bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-sm uppercase tracking-wider rounded-xl shadow-xl hover:shadow-2xl transition-all cursor-pointer flex items-center justify-center gap-2"
+          >
+            <Heart className="w-4 h-4 fill-white" />
+            <span>Support A Child Today</span>
+          </button>
+
+          <button
+            type="button"
+            onClick={onExplore}
+            className="w-full sm:w-auto px-8 py-4 bg-stone-900/90 hover:bg-stone-800 text-stone-100 border border-stone-700 font-bold text-sm uppercase tracking-wider rounded-xl shadow-lg transition-all cursor-pointer flex items-center justify-center gap-2"
+          >
+            <span>Explore Living Initiatives</span>
+            <ArrowRight className="w-4 h-4" />
+          </button>
+        </motion.div>
+
+        {/* Reassuring Badges */}
         <motion.div
           initial={{ opacity: 0 }}
-          animate={{ opacity: 0.5 }}
-          transition={{ delay: 1.5, duration: 1 }}
-          className="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 pointer-events-none"
+          animate={{ opacity: 1 }}
+          transition={{ duration: 1, delay: 0.7 }}
+          className="flex flex-wrap justify-center items-center gap-6 pt-6 text-xs text-stone-400 font-mono"
         >
-          <span className="font-mono text-[9px] uppercase tracking-widest text-stone-400">SCROLL DOWN</span>
-          <div className="w-[1px] h-12 bg-gradient-to-b from-stone-400 to-transparent relative overflow-hidden">
-            <motion.div
-              animate={{ y: ['-100%', '100%'] }}
-              transition={{ duration: 2, repeat: Infinity, ease: 'linear' }}
-              className="absolute top-0 left-0 right-0 h-4 bg-white"
-            />
+          <div className="flex items-center gap-1.5">
+            <ShieldCheck className="w-4 h-4 text-emerald-400" />
+            <span>501(c)(3) / UK Charity Certified</span>
+          </div>
+          <div className="flex items-center gap-1.5">
+            <Award className="w-4 h-4 text-amber-400" />
+            <span>GuideStar Platinum Transparency</span>
+          </div>
+          <div className="flex items-center gap-1.5">
+            <Users className="w-4 h-4 text-emerald-400" />
+            <span>232K+ Verified Beneficiaries</span>
           </div>
         </motion.div>
+
       </div>
+
     </section>
   );
 }
