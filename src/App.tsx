@@ -54,6 +54,7 @@ import StoryWall from './components/StoryWall';
 import NarrativeJourney from './components/NarrativeJourney';
 import SuccessFeatures from './components/SuccessFeatures';
 import ToastContainer, { ToastMessage } from './components/Toast';
+import AnimatedHeader from './components/AnimatedHeader';
 
 // Raw Initial Datasets
 import { 
@@ -352,11 +353,22 @@ export default function App() {
         
         {/* VIEW 1: COMPLETE HOME PAGE WITH ALL NEW SECTIONS */}
         {currentPath === 'home' && (
-          <div>
+          <div className="space-y-0 relative overflow-hidden bg-[#fcfbfa]">
+            
+            {/* Ambient Background Blur Blobs */}
+            <div className="absolute top-[10%] left-[5%] w-[35rem] h-[35rem] bg-emerald-500/5 rounded-full blur-[100px] pointer-events-none" />
+            <div className="absolute top-[30%] right-[5%] w-[40rem] h-[40rem] bg-amber-500/5 rounded-full blur-[120px] pointer-events-none" />
+            <div className="absolute top-[50%] left-[8%] w-[30rem] h-[30rem] bg-indigo-500/5 rounded-full blur-[90px] pointer-events-none" />
+            <div className="absolute top-[75%] right-[10%] w-[38rem] h-[38rem] bg-emerald-500/5 rounded-full blur-[110px] pointer-events-none" />
+            <div className="absolute bottom-[5%] left-[10%] w-[32rem] h-[32rem] bg-amber-500/5 rounded-full blur-[100px] pointer-events-none" />
+
             {/* HERO BANNER */}
-            <div id="hero">
+            <div id="hero" className="relative z-10">
               <HeroSection 
-                onExplore={() => handleNavigate('programs')} 
+                onExplore={() => {
+                  const el = document.getElementById('programs-preview');
+                  if (el) el.scrollIntoView({ behavior: 'smooth' });
+                }} 
                 onDonateClick={() => handleNavigate('donate')}
                 onUrgentClick={() => {
                   const el = document.getElementById('urgent-appeal');
@@ -366,665 +378,496 @@ export default function App() {
             </div>
 
             {/* URGENT RELIEF CAMPAIGN */}
-            <div id="urgent-appeal">
+            <div id="urgent-appeal" className="relative z-10">
               <UrgentCampaign onPledge={handlePledgeGeneral} />
             </div>
 
             {/* MARQUEE METRICS TICKER */}
-            <div id="marquee">
+            <div id="marquee" className="relative z-10">
               <ImpactMarquee />
             </div>
+
+            {/* SECTION 1: CORE OPERATIONAL SECTORS (PROGRAMS PREVIEW) */}
+            <section id="programs-preview" className="py-24 px-6 lg:px-8 max-w-7xl mx-auto relative z-10 text-center space-y-12">
+              <div className="space-y-4">
+                <span className="text-emerald-700 font-mono text-xs uppercase tracking-widest font-bold">
+                  MENU SECTION // 01 // CORE SECTORS
+                </span>
+                <div className="h-12 flex items-center justify-center">
+                  <AnimatedHeader 
+                    text="Strategic Focus Areas & Pillars" 
+                    className="text-3xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight text-stone-900"
+                  />
+                </div>
+                <p className="max-w-2xl mx-auto text-sm text-stone-600 font-light">
+                  From eco-classrooms built of recycled plastic bottles to chimpanzee sanctuaries, sports tournaments, and free cataract clinics.
+                </p>
+              </div>
+
+              {/* Glassmorphic Container Wrapper */}
+              <div className="bg-white/40 backdrop-blur-md border border-white/60 p-6 sm:p-10 rounded-2xl shadow-xl">
+                <ProgramIdentities programs={programsStore} />
+                
+                <div className="pt-8 flex justify-center">
+                  <button
+                    type="button"
+                    onClick={() => handleNavigate('programs')}
+                    className="px-8 py-3.5 bg-stone-900 hover:bg-stone-850 text-white font-bold text-xs uppercase tracking-wider rounded-xl shadow-md hover:shadow-lg transition-all flex items-center gap-2 cursor-pointer"
+                  >
+                    <span>View Full Initiative Matrix</span>
+                    <ArrowRight className="w-4 h-4" />
+                  </button>
+                </div>
+              </div>
+            </section>
+
+            {/* SECTION 2: FIDUCIARY SIMULATOR (CALCULATOR PREVIEW) */}
+            <section id="calculator-preview" className="py-24 px-6 lg:px-8 max-w-7xl mx-auto relative z-10 text-center space-y-12">
+              <div className="space-y-4">
+                <span className="text-emerald-700 font-mono text-xs uppercase tracking-widest font-bold">
+                  MENU SECTION // 02 // DIRECT MATHEMATICAL IMPACT
+                </span>
+                <div className="h-12 flex items-center justify-center">
+                  <AnimatedHeader 
+                    text="Calculate Your Exact Impact" 
+                    className="text-3xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight text-stone-900"
+                  />
+                </div>
+                <p className="max-w-xl mx-auto text-sm text-stone-600 font-light">
+                  See mathematically how your contribution converts into real-world school scholarships, clinical visits, and clean water wells.
+                </p>
+              </div>
+
+              {/* Solid base for interaction, wrapped with clean glassmorphic frame */}
+              <div className="bg-white/40 backdrop-blur-md border border-white/60 p-4 sm:p-8 rounded-2xl shadow-xl">
+                <TransparencyCalculator onPledge={handlePledgeGeneral} currency={currency} />
+                
+                <div className="pt-8 flex justify-center">
+                  <button
+                    type="button"
+                    onClick={() => handleNavigate('calculator')}
+                    className="px-8 py-3.5 bg-emerald-600 hover:bg-emerald-750 text-white font-bold text-xs uppercase tracking-wider rounded-xl shadow-md transition-all flex items-center gap-2 cursor-pointer"
+                  >
+                    <span>Open Dedicated Simulator</span>
+                    <ArrowRight className="w-4 h-4" />
+                  </button>
+                </div>
+              </div>
+            </section>
+
+            {/* SECTION 3: EVOLUTION TIMELINE (TIMELINE PREVIEW) */}
+            <section id="timeline-preview" className="py-24 px-6 lg:px-8 max-w-7xl mx-auto relative z-10 text-center space-y-12">
+              <div className="space-y-4">
+                <span className="text-emerald-700 font-mono text-xs uppercase tracking-widest font-bold">
+                  MENU SECTION // 03 // 15 YEARS OF CHRONICLES
+                </span>
+                <div className="h-12 flex items-center justify-center">
+                  <AnimatedHeader 
+                    text="15 Years of Verifiable Progress" 
+                    className="text-3xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight text-stone-900"
+                  />
+                </div>
+                <p className="max-w-xl mx-auto text-sm text-stone-600 font-light">
+                  Trace our historical footprint from 2011 East African drought response to our current presence across 395 global sectors.
+                </p>
+              </div>
+
+              {/* Glassmorphic Timeline block */}
+              <div className="bg-white/30 backdrop-blur-md border border-white/50 p-6 sm:p-10 rounded-2xl shadow-xl space-y-10">
+                <MilestoneTimeline />
+                
+                <div className="border-t border-stone-200/50 pt-8 max-w-4xl mx-auto">
+                  <p className="text-xs text-stone-500 uppercase tracking-widest font-mono font-bold mb-4">DEEP DIVE READ</p>
+                  <NarrativeJourney />
+                </div>
+
+                <div className="pt-4 flex justify-center">
+                  <button
+                    type="button"
+                    onClick={() => handleNavigate('timeline')}
+                    className="px-8 py-3.5 bg-stone-900 hover:bg-stone-850 text-white font-bold text-xs uppercase tracking-wider rounded-xl shadow-md transition-all flex items-center gap-2 cursor-pointer"
+                  >
+                    <span>View Comprehensive Chronology</span>
+                    <ArrowRight className="w-4 h-4" />
+                  </button>
+                </div>
+              </div>
+            </section>
+
+            {/* SECTION 4: GET INVOLVED (PARTNERSHIPS PREVIEW) */}
+            <section id="sponsor-preview" className="py-24 px-6 lg:px-8 max-w-7xl mx-auto relative z-10 text-center space-y-12">
+              <div className="space-y-4">
+                <span className="text-emerald-700 font-mono text-xs uppercase tracking-widest font-bold">
+                  MENU SECTION // 04 // VOLUNTEER &amp; ALLIANCES
+                </span>
+                <div className="h-12 flex items-center justify-center">
+                  <AnimatedHeader 
+                    text="Get Involved &amp; Partner" 
+                    className="text-3xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight text-stone-900"
+                  />
+                </div>
+                <p className="max-w-xl mx-auto text-sm text-stone-600 font-light">
+                  Apply as a specialist field volunteer, or submit a corporate CSR grant cooperation proposal.
+                </p>
+              </div>
+
+              {/* Glassmorphic Grid enclosing solid color forms */}
+              <div className="bg-white/40 backdrop-blur-md border border-white/60 p-6 sm:p-10 rounded-2xl shadow-xl space-y-8">
+                <div className="grid grid-cols-1 lg:grid-cols-2 gap-10">
+                  
+                  {/* Volunteer Box */}
+                  <div className="bg-white/90 p-6 sm:p-8 rounded-xl border border-stone-200/80 shadow-md text-left space-y-5">
+                    <div className="space-y-1">
+                      <span className="text-xs font-mono font-bold text-emerald-700 uppercase">JOIN OUR FIELD SPECIALISTS</span>
+                      <h4 className="text-lg font-bold text-stone-900">Volunteer Application</h4>
+                    </div>
+
+                    {volFormSuccess ? (
+                      <div className="p-6 bg-emerald-50 border border-emerald-200 rounded-xl text-center space-y-2">
+                        <Check className="w-8 h-8 text-emerald-600 mx-auto" />
+                        <strong className="text-emerald-900 text-sm block">Volunteer Application Received</strong>
+                        <p className="text-xs text-emerald-700">Safeguarding team is reviewing your details.</p>
+                      </div>
+                    ) : (
+                      <form onSubmit={handleRegisterVolunteerSubmit} className="space-y-4">
+                        <div>
+                          <label className="block text-[10px] font-bold uppercase text-stone-500 mb-1">Your Full Name</label>
+                          <input
+                            type="text"
+                            required
+                            placeholder="Dr. Sarah Jenkins"
+                            value={volFormName}
+                            onChange={(e) => setVolFormName(e.target.value)}
+                            className="w-full p-2.5 bg-stone-50 border border-stone-300 rounded-xl text-xs"
+                          />
+                        </div>
+                        <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                          <div>
+                            <label className="block text-[10px] font-bold uppercase text-stone-500 mb-1">Email Address</label>
+                            <input
+                              type="email"
+                              required
+                              placeholder="sarah@institution.org"
+                              value={volFormEmail}
+                              onChange={(e) => setVolFormEmail(e.target.value)}
+                              className="w-full p-2.5 bg-stone-50 border border-stone-300 rounded-xl text-xs"
+                            />
+                          </div>
+                          <div>
+                            <label className="block text-[10px] font-bold uppercase text-stone-500 mb-1">Availability Cycle</label>
+                            <select
+                              value={volFormAvail}
+                              onChange={(e) => setVolFormAvail(e.target.value)}
+                              className="w-full p-2.5 bg-stone-50 border border-stone-300 rounded-xl text-xs"
+                            >
+                              <option value="Part-Time (Weekends)">Part-Time (Weekends)</option>
+                              <option value="Remote Digital Specialist">Remote Digital Specialist</option>
+                              <option value="Field Outreach Placement">Field Outreach Placement</option>
+                            </select>
+                          </div>
+                        </div>
+                        <div>
+                          <label className="block text-[10px] font-bold uppercase text-stone-500 mb-1">Background Summary</label>
+                          <textarea
+                            rows={2}
+                            placeholder="Detail clinical, teaching, or conservation skillsets..."
+                            value={volFormMsg}
+                            onChange={(e) => setVolFormMsg(e.target.value)}
+                            className="w-full p-2.5 bg-stone-50 border border-stone-300 rounded-xl text-xs"
+                          />
+                        </div>
+                        <button
+                          type="submit"
+                          className="w-full py-2.5 bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-xs uppercase tracking-wider rounded-xl transition-all cursor-pointer"
+                        >
+                          Submit Volunteer Dossier
+                        </button>
+                      </form>
+                    )}
+                  </div>
+
+                  {/* Corporate Alliance Box */}
+                  <div className="bg-white/90 p-6 sm:p-8 rounded-xl border border-stone-200/80 shadow-md text-left space-y-5">
+                    <div className="space-y-1">
+                      <span className="text-xs font-mono font-bold text-amber-700 uppercase">INSTITUTIONAL &amp; CSR GRANTS</span>
+                      <h4 className="text-lg font-bold text-stone-900">Corporate Collaboration</h4>
+                    </div>
+
+                    {pFormSuccess ? (
+                      <div className="p-6 bg-amber-50 border border-amber-200 rounded-xl text-center space-y-2">
+                        <Check className="w-8 h-8 text-amber-600 mx-auto" />
+                        <strong className="text-amber-900 text-sm block">Proposal Logged</strong>
+                        <p className="text-xs text-amber-700">Partnership director will connect shortly.</p>
+                      </div>
+                    ) : (
+                      <form onSubmit={handlePartnerSubmit} className="space-y-4">
+                        <div>
+                          <label className="block text-[10px] font-bold uppercase text-stone-500 mb-1">Company / Organization Name</label>
+                          <input
+                            type="text"
+                            required
+                            placeholder="Global Horizons Trust"
+                            value={pFormOrg}
+                            onChange={(e) => setPFormOrg(e.target.value)}
+                            className="w-full p-2.5 bg-stone-50 border border-stone-300 rounded-xl text-xs"
+                          />
+                        </div>
+                        <div className="grid grid-cols-2 gap-3">
+                          <div>
+                            <label className="block text-[10px] font-bold uppercase text-stone-500 mb-1">Contact Name</label>
+                            <input
+                              type="text"
+                              required
+                              placeholder="David Chen"
+                              value={pFormContact}
+                              onChange={(e) => setPFormContact(e.target.value)}
+                              className="w-full p-2.5 bg-stone-50 border border-stone-300 rounded-xl text-xs"
+                            />
+                          </div>
+                          <div>
+                            <label className="block text-[10px] font-bold uppercase text-stone-500 mb-1">Liaison Email</label>
+                            <input
+                              type="email"
+                              required
+                              placeholder="d.chen@horizons.org"
+                              value={pFormEmail}
+                              onChange={(e) => setPFormEmail(e.target.value)}
+                              className="w-full p-2.5 bg-stone-50 border border-stone-300 rounded-xl text-xs"
+                            />
+                          </div>
+                        </div>
+                        <div>
+                          <label className="block text-[10px] font-bold uppercase text-stone-500 mb-1">Cooperation Scope</label>
+                          <textarea
+                            rows={2}
+                            placeholder="Sponsorship fields, CSR targets, or material donations..."
+                            value={pFormMsg}
+                            onChange={(e) => setPFormMsg(e.target.value)}
+                            className="w-full p-2.5 bg-stone-50 border border-stone-300 rounded-xl text-xs"
+                          />
+                        </div>
+                        <button
+                          type="submit"
+                          className="w-full py-2.5 bg-stone-900 hover:bg-stone-850 text-white font-bold text-xs uppercase tracking-wider rounded-xl transition-all cursor-pointer"
+                        >
+                          Submit Collaboration Proposal
+                        </button>
+                      </form>
+                    )}
+                  </div>
+
+                </div>
+
+                <div className="pt-4 flex justify-center">
+                  <button
+                    type="button"
+                    onClick={() => handleNavigate('sponsor')}
+                    className="px-8 py-3.5 bg-stone-900 hover:bg-stone-850 text-white font-bold text-xs uppercase tracking-wider rounded-xl shadow-md transition-all flex items-center gap-2 cursor-pointer"
+                  >
+                    <span>Explore All Partnership Tracks</span>
+                    <ArrowRight className="w-4 h-4" />
+                  </button>
+                </div>
+              </div>
+            </section>
+
+            {/* SECTION 5: AUDITED PORTAL (REPORTS PREVIEW) */}
+            <section id="reports-preview" className="py-24 px-6 lg:px-8 max-w-7xl mx-auto relative z-10 text-center space-y-12">
+              <div className="space-y-4">
+                <span className="text-emerald-700 font-mono text-xs uppercase tracking-widest font-bold">
+                  MENU SECTION // 05 // TRANSPARENCY ARCHIVE
+                </span>
+                <div className="h-12 flex items-center justify-center">
+                  <AnimatedHeader 
+                    text="Audited Reports &amp; IRS Filings" 
+                    className="text-3xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight text-stone-900"
+                  />
+                </div>
+                <p className="max-w-xl mx-auto text-sm text-stone-600 font-light">
+                  Download and review certified audits, financial boards balances, and children safeguarding guidelines.
+                </p>
+              </div>
+
+              {/* Glassmorphic Reports Panel */}
+              <div className="bg-white/40 backdrop-blur-md border border-white/60 p-6 sm:p-10 rounded-2xl shadow-xl">
+                <TrustReports reports={reportsStore} onDownload={handleReportDownload} />
+                
+                <div className="pt-8 flex justify-center">
+                  <button
+                    type="button"
+                    onClick={() => handleNavigate('reports')}
+                    className="px-8 py-3.5 bg-stone-900 hover:bg-stone-850 text-white font-bold text-xs uppercase tracking-wider rounded-xl shadow-md transition-all flex items-center gap-2 cursor-pointer"
+                  >
+                    <span>View Complete Transparency Portal</span>
+                    <ArrowRight className="w-4 h-4" />
+                  </button>
+                </div>
+              </div>
+            </section>
+
+            {/* SECTION 6: PRESS DISPATCHES & WEBMINARS (UPDATES PREVIEW) */}
+            <section id="news-preview" className="py-24 px-6 lg:px-8 max-w-7xl mx-auto relative z-10 text-center space-y-12">
+              <div className="space-y-4">
+                <span className="text-emerald-700 font-mono text-xs uppercase tracking-widest font-bold">
+                  MENU SECTION // 06 // PRESS LOGS &amp; EVENTS
+                </span>
+                <div className="h-12 flex items-center justify-center">
+                  <AnimatedHeader 
+                    text="Latest Field Dispatches" 
+                    className="text-3xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight text-stone-900"
+                  />
+                </div>
+                <p className="max-w-xl mx-auto text-sm text-stone-600 font-light">
+                  Active field updates, upcoming advocacy sessions, and new classroom openings.
+                </p>
+              </div>
+
+              {/* Streamlined Side-by-side Glassmorphic Layout */}
+              <div className="bg-white/40 backdrop-blur-md border border-white/60 p-6 sm:p-10 rounded-2xl shadow-xl text-left">
+                <div className="grid grid-cols-1 lg:grid-cols-12 gap-12">
+                  
+                  {/* Left Side: Dynamic Articles Preview */}
+                  <div className="lg:col-span-7 space-y-6">
+                    <h4 className="font-bold text-lg text-stone-900 border-b border-stone-200 pb-2">Active Press Articles</h4>
+                    <div className="space-y-6">
+                      {newsStore.slice(0, 3).map((article) => (
+                        <div key={article.id} className="grid grid-cols-1 sm:grid-cols-12 gap-4 items-start">
+                          <div className="sm:col-span-4 h-24 bg-stone-900 rounded-lg overflow-hidden relative">
+                            <img src={article.image} className="w-full h-full object-cover" alt={article.title} referrerPolicy="no-referrer" />
+                          </div>
+                          <div className="sm:col-span-8 space-y-1">
+                            <div className="flex items-center gap-1.5 text-[9px] font-mono text-stone-400 uppercase font-bold">
+                              <span className="text-emerald-700">{article.category}</span>
+                              <span>•</span>
+                              <span>{article.date}</span>
+                            </div>
+                            <h5 className="font-bold text-sm text-stone-900 leading-tight">
+                              {article.title}
+                            </h5>
+                            <p className="text-xs text-stone-600 line-clamp-2">
+                              {article.content}
+                            </p>
+                          </div>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+
+                  {/* Right Side: Interactive Gatherings Preview */}
+                  <div className="lg:col-span-5 space-y-6">
+                    <h4 className="font-bold text-lg text-stone-900 border-b border-stone-200 pb-2">Advocacy Calendar</h4>
+                    <div className="space-y-4">
+                      {eventsStore.slice(0, 3).map((evt) => (
+                        <div key={evt.id} className="p-3 bg-white/90 border border-stone-200/80 rounded-xl space-y-1.5 shadow-2xs">
+                          <div className="flex justify-between items-center text-[9px] font-mono font-bold uppercase text-emerald-800">
+                            <span>{evt.category}</span>
+                            <span>{evt.date}</span>
+                          </div>
+                          <div>
+                            <strong className="text-stone-950 text-xs block">{evt.title}</strong>
+                            <span className="text-[11px] text-stone-500 block leading-tight">{evt.description}</span>
+                          </div>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+
+                </div>
+
+                <div className="pt-8 flex justify-center">
+                  <button
+                    type="button"
+                    onClick={() => handleNavigate('news-events')}
+                    className="px-8 py-3.5 bg-stone-900 hover:bg-stone-850 text-white font-bold text-xs uppercase tracking-wider rounded-xl shadow-md transition-all flex items-center gap-2 cursor-pointer"
+                  >
+                    <span>Read All Dispatches &amp; Calendar</span>
+                    <ArrowRight className="w-4 h-4" />
+                  </button>
+                </div>
+              </div>
+            </section>
 
           </div>
         )}
 
         {/* VIEW 2: DEDICATED PROGRAMS & FOCUS SECTORS */}
         {currentPath === 'programs' && (
-          <div className="space-y-12 pb-24">
-            <section className="bg-stone-900 text-white py-16 px-6 text-center">
-              <div className="max-w-4xl mx-auto space-y-4">
-                <span className="text-emerald-400 font-mono text-xs uppercase tracking-widest font-bold">
-                  CORE OPERATIONAL SECTORS
-                </span>
-                <h1 className="text-4xl sm:text-5xl font-extrabold tracking-tight">
-                  Strategic Focus Areas &amp; Pillars
-                </h1>
-                <p className="max-w-2xl mx-auto text-sm text-stone-300 font-light">
-                  From eco-classrooms built of recycled plastic bottles to chimpanzee sanctuaries, sports tournaments, and free cataract clinics, explore our verified programs in detail.
-                </p>
-              </div>
-            </section>
-
-            <ProgramIdentities programs={programsStore} />
-
-            <div className="max-w-7xl mx-auto px-6">
-              <UrgentCampaign onPledge={handlePledgeGeneral} />
+          <div className="min-h-[60vh] flex items-center justify-center">
+            <div className="text-center space-y-4">
+              <span className="text-stone-400 text-xs font-mono tracking-widest uppercase">SECTION EMPTY</span>
             </div>
           </div>
         )}
 
         {/* VIEW 3: DEDICATED TRANSPARENCY CALCULATOR */}
         {currentPath === 'calculator' && (
-          <div className="space-y-12 pb-24">
-            <section className="bg-stone-900 text-white py-16 px-6 text-center">
-              <div className="max-w-4xl mx-auto space-y-4">
-                <span className="text-emerald-400 font-mono text-xs uppercase tracking-widest font-bold">
-                  FIDUCIARY SIMULATOR
-                </span>
-                <h1 className="text-4xl sm:text-5xl font-extrabold tracking-tight">
-                  Calculate Your Direct Impact
-                </h1>
-                <p className="max-w-xl mx-auto text-sm text-stone-300 font-light">
-                  See mathematically how your contribution converts into real-world school scholarships, clinical visits, and clean water wells.
-                </p>
-              </div>
-            </section>
-
-            <TransparencyCalculator onPledge={handlePledgeGeneral} currency={currency} />
+          <div className="min-h-[60vh] flex items-center justify-center">
+            <div className="text-center space-y-4">
+              <span className="text-stone-400 text-xs font-mono tracking-widest uppercase">SECTION EMPTY</span>
+            </div>
           </div>
         )}
 
         {/* VIEW 4: DEDICATED 15-YEAR TIMELINE & CHRONICLE */}
         {currentPath === 'timeline' && (
-          <div className="space-y-12 pb-24">
-            <section className="bg-stone-900 text-white py-16 px-6 text-center">
-              <div className="max-w-4xl mx-auto space-y-4">
-                <span className="text-emerald-400 font-mono text-xs uppercase tracking-widest font-bold">
-                  FOUNDATION EVOLUTION
-                </span>
-                <h1 className="text-4xl sm:text-5xl font-extrabold tracking-tight">
-                  15 Years of Verifiable Progress
-                </h1>
-                <p className="max-w-xl mx-auto text-sm text-stone-300 font-light">
-                  Trace our journey from the 2011 East African drought response to our current global presence across 395 districts.
-                </p>
-              </div>
-            </section>
-
-            <MilestoneTimeline />
-
-            <div className="max-w-7xl mx-auto px-6">
-              <NarrativeJourney />
+          <div className="min-h-[60vh] flex items-center justify-center">
+            <div className="text-center space-y-4">
+              <span className="text-stone-400 text-xs font-mono tracking-widest uppercase">SECTION EMPTY</span>
             </div>
           </div>
         )}
 
         {/* VIEW 5: GET INVOLVED & PARTNERSHIPS */}
         {currentPath === 'sponsor' && (
-          <div className="space-y-16 pb-24">
-            <section className="bg-stone-900 text-white py-16 px-6 text-center">
-              <div className="max-w-4xl mx-auto space-y-4">
-                <span className="text-emerald-400 font-mono text-xs uppercase tracking-widest font-bold">
-                  JOIN OUR MISSION
-                </span>
-                <h1 className="text-4xl sm:text-5xl font-extrabold tracking-tight">
-                  Get Involved &amp; Partner
-                </h1>
-                <p className="max-w-xl mx-auto text-sm text-stone-300 font-light">
-                  Apply as a specialist volunteer, or propose a corporate grant alliance to directly support vulnerable youth.
-                </p>
-              </div>
-            </section>
-
-            {/* Volunteer & Corporate Alliances Forms */}
-            <div className="max-w-7xl mx-auto px-6 space-y-12">
-              <div className="text-left border-b border-stone-200 pb-4">
-                <h3 className="text-2xl font-bold text-stone-900">Volunteer &amp; Corporate Partnerships</h3>
-                <p className="text-xs text-stone-500">Contribute your specialized skills or deploy company CSR funds directly.</p>
-              </div>
-
-              <div className="grid grid-cols-1 lg:grid-cols-2 gap-10">
-                
-                {/* Volunteer Application Box */}
-                <div className="bg-white p-6 sm:p-8 rounded-2xl border border-stone-200 shadow-md text-left space-y-5">
-                  <div className="space-y-1">
-                    <span className="text-xs font-mono font-bold text-emerald-700 uppercase">JOIN OUR FIELD SPECIALISTS</span>
-                    <h4 className="text-xl font-bold text-stone-900">Volunteer Application</h4>
-                  </div>
-
-                  {volFormSuccess ? (
-                    <div className="p-6 bg-emerald-50 border border-emerald-200 rounded-xl text-center space-y-2">
-                      <Check className="w-8 h-8 text-emerald-600 mx-auto" />
-                      <strong className="text-emerald-900 text-sm block">Volunteer Application Received</strong>
-                      <p className="text-xs text-emerald-700">Thank you. Our safeguarding officer will review your dossier within 3 business days.</p>
-                    </div>
-                  ) : (
-                    <form onSubmit={handleRegisterVolunteerSubmit} className="space-y-4">
-                      <div>
-                        <label className="block text-xs font-bold uppercase text-stone-500 mb-1">Your Full Name</label>
-                        <input
-                          type="text"
-                          required
-                          placeholder="Dr. Sarah Jenkins"
-                          value={volFormName}
-                          onChange={(e) => setVolFormName(e.target.value)}
-                          className="w-full p-2.5 bg-stone-50 border border-stone-300 rounded-xl text-xs"
-                        />
-                      </div>
-
-                      <div>
-                        <label className="block text-xs font-bold uppercase text-stone-500 mb-1">Email Address</label>
-                        <input
-                          type="email"
-                          required
-                          placeholder="sarah@institution.org"
-                          value={volFormEmail}
-                          onChange={(e) => setVolFormEmail(e.target.value)}
-                          className="w-full p-2.5 bg-stone-50 border border-stone-300 rounded-xl text-xs"
-                        />
-                      </div>
-
-                      <div>
-                        <label className="block text-xs font-bold uppercase text-stone-500 mb-1">Availability Cycle</label>
-                        <select
-                          value={volFormAvail}
-                          onChange={(e) => setVolFormAvail(e.target.value)}
-                          className="w-full p-2.5 bg-stone-50 border border-stone-300 rounded-xl text-xs"
-                        >
-                          <option value="Part-Time (Weekends)">Part-Time (Weekends)</option>
-                          <option value="Remote Digital Specialist">Remote Digital Specialist</option>
-                          <option value="Field Outreach Placement">Field Outreach Placement</option>
-                        </select>
-                      </div>
-
-                      <div>
-                        <label className="block text-xs font-bold uppercase text-stone-500 mb-1">Background Summary &amp; Motivation</label>
-                        <textarea
-                          rows={3}
-                          placeholder="Detail your clinical, teaching, or engineering background..."
-                          value={volFormMsg}
-                          onChange={(e) => setVolFormMsg(e.target.value)}
-                          className="w-full p-2.5 bg-stone-50 border border-stone-300 rounded-xl text-xs"
-                        />
-                      </div>
-
-                      <button
-                        type="submit"
-                        className="w-full py-3 bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-xs uppercase tracking-wider rounded-xl transition-all cursor-pointer shadow-sm"
-                      >
-                        Submit Volunteer Dossier
-                      </button>
-                    </form>
-                  )}
-                </div>
-
-                {/* Corporate Alliance Box */}
-                <div className="bg-white p-6 sm:p-8 rounded-2xl border border-stone-200 shadow-md text-left space-y-5">
-                  <div className="space-y-1">
-                    <span className="text-xs font-mono font-bold text-amber-700 uppercase">INSTITUTIONAL &amp; CSR GRANTS</span>
-                    <h4 className="text-xl font-bold text-stone-900">Corporate &amp; NGO Collaboration</h4>
-                  </div>
-
-                  {pFormSuccess ? (
-                    <div className="p-6 bg-amber-50 border border-amber-200 rounded-xl text-center space-y-2">
-                      <Check className="w-8 h-8 text-amber-600 mx-auto" />
-                      <strong className="text-amber-900 text-sm block">Cooperation Proposal Logged</strong>
-                      <p className="text-xs text-amber-700">Thank you. Our partnership director will contact your liaison representative shortly.</p>
-                    </div>
-                  ) : (
-                    <form onSubmit={handlePartnerSubmit} className="space-y-4">
-                      <div>
-                        <label className="block text-xs font-bold uppercase text-stone-500 mb-1">Company / Organization Name</label>
-                        <input
-                          type="text"
-                          required
-                          placeholder="Global Horizons Trust"
-                          value={pFormOrg}
-                          onChange={(e) => setPFormOrg(e.target.value)}
-                          className="w-full p-2.5 bg-stone-50 border border-stone-300 rounded-xl text-xs"
-                        />
-                      </div>
-
-                      <div className="grid grid-cols-2 gap-3">
-                        <div>
-                          <label className="block text-xs font-bold uppercase text-stone-500 mb-1">Contact Name</label>
-                          <input
-                            type="text"
-                            required
-                            placeholder="David Chen"
-                            value={pFormContact}
-                            onChange={(e) => setPFormContact(e.target.value)}
-                            className="w-full p-2.5 bg-stone-50 border border-stone-300 rounded-xl text-xs"
-                          />
-                        </div>
-                        <div>
-                          <label className="block text-xs font-bold uppercase text-stone-500 mb-1">Liaison Email</label>
-                          <input
-                            type="email"
-                            required
-                            placeholder="d.chen@horizons.org"
-                            value={pFormEmail}
-                            onChange={(e) => setPFormEmail(e.target.value)}
-                            className="w-full p-2.5 bg-stone-50 border border-stone-300 rounded-xl text-xs"
-                          />
-                        </div>
-                      </div>
-
-                      <div>
-                        <label className="block text-xs font-bold uppercase text-stone-500 mb-1">Partnership Type</label>
-                        <select
-                          value={pFormType}
-                          onChange={(e) => setPFormType(e.target.value as any)}
-                          className="w-full p-2.5 bg-stone-50 border border-stone-300 rounded-xl text-xs"
-                        >
-                          <option value="Corporate">Corporate Venture / CSR Grant</option>
-                          <option value="NGO">Non-Governmental Organization</option>
-                          <option value="Government">State Grant Agency</option>
-                          <option value="Academic">Academic &amp; Research Institute</option>
-                        </select>
-                      </div>
-
-                      <div>
-                        <label className="block text-xs font-bold uppercase text-stone-500 mb-1">Collaboration Proposal Scope</label>
-                        <textarea
-                          rows={3}
-                          placeholder="Briefly describe your proposed grant allocation or sponsorship plan..."
-                          value={pFormMsg}
-                          onChange={(e) => setPFormMsg(e.target.value)}
-                          className="w-full p-2.5 bg-stone-50 border border-stone-300 rounded-xl text-xs"
-                        />
-                      </div>
-
-                      <button
-                        type="submit"
-                        className="w-full py-3 bg-stone-900 hover:bg-stone-800 text-white font-bold text-xs uppercase tracking-wider rounded-xl transition-all cursor-pointer shadow-sm"
-                      >
-                        Submit Partnership Proposal
-                      </button>
-                    </form>
-                  )}
-                </div>
-
-              </div>
+          <div className="min-h-[60vh] flex items-center justify-center">
+            <div className="text-center space-y-4">
+              <span className="text-stone-400 text-xs font-mono tracking-widest uppercase">SECTION EMPTY</span>
             </div>
-
           </div>
         )}
 
         {/* VIEW 6: REPORTS & TRANSPARENCY ARCHIVE */}
         {currentPath === 'reports' && (
-          <div className="space-y-12 pb-24">
-            <section className="bg-stone-900 text-white py-16 px-6 text-center">
-              <div className="max-w-4xl mx-auto space-y-4">
-                <span className="text-emerald-400 font-mono text-xs uppercase tracking-widest font-bold">
-                  AUDITED FIDUCIARY PORTAL
-                </span>
-                <h1 className="text-4xl sm:text-5xl font-extrabold tracking-tight">
-                  Public Audits &amp; Annual Reports
-                </h1>
-                <p className="max-w-xl mx-auto text-sm text-stone-300 font-light">
-                  Inspect certified IRS Form 990 filings, external auditor balances, and child safeguarding manuals.
-                </p>
-              </div>
-            </section>
-
-            <TrustReports reports={reportsStore} onDownload={handleReportDownload} />
+          <div className="min-h-[60vh] flex items-center justify-center">
+            <div className="text-center space-y-4">
+              <span className="text-stone-400 text-xs font-mono tracking-widest uppercase">SECTION EMPTY</span>
+            </div>
           </div>
         )}
 
         {/* VIEW 7: UPDATES, NEWS & GLOBAL GATHERINGS */}
         {currentPath === 'news-events' && (
-          <div className="space-y-16 pb-24">
-            <section className="bg-stone-900 text-white py-16 px-6 text-center">
-              <div className="max-w-4xl mx-auto space-y-4">
-                <span className="text-emerald-400 font-mono text-xs uppercase tracking-widest font-bold">
-                  LATEST DISPATCHES
-                </span>
-                <h1 className="text-4xl sm:text-5xl font-extrabold tracking-tight">
-                  Press Logs &amp; Global Gatherings
-                </h1>
-                <p className="max-w-xl mx-auto text-sm text-stone-300 font-light">
-                  Fieldwork progress reports, new solar classroom openings, and upcoming global advocacy webinars.
-                </p>
-              </div>
-            </section>
-
-            <section className="max-w-7xl mx-auto px-6 grid grid-cols-1 lg:grid-cols-12 gap-12 text-left">
-              {/* Left Side: News List */}
-              <div className="lg:col-span-7 space-y-8">
-                <div className="flex justify-between items-center border-b border-stone-200 pb-3">
-                  <h3 className="font-bold text-xl text-stone-900">Latest Field Articles</h3>
-                  <div className="flex gap-1.5 text-xs">
-                    {['All', 'Update', 'Press Release', 'Announcement'].map((f) => (
-                      <button
-                        key={f}
-                        type="button"
-                        onClick={() => setNewsFilter(f)}
-                        className={`px-3 py-1 rounded-md transition-all cursor-pointer text-xs font-semibold ${
-                          newsFilter === f
-                            ? 'bg-stone-900 text-amber-400'
-                            : 'bg-stone-100 text-stone-600 hover:bg-stone-200'
-                        }`}
-                      >
-                        {f}
-                      </button>
-                    ))}
-                  </div>
-                </div>
-
-                <div className="space-y-8">
-                  {filteredNews.map((article) => (
-                    <div key={article.id} className="grid grid-cols-1 md:grid-cols-12 gap-6 items-start">
-                      <div className="md:col-span-4 h-36 bg-stone-900 rounded-xl overflow-hidden relative">
-                        <img src={article.image} className="w-full h-full object-cover" alt={article.title} referrerPolicy="no-referrer" />
-                      </div>
-                      <div className="md:col-span-8 space-y-2">
-                        <div className="flex items-center gap-2 text-[10px] font-mono text-stone-400 uppercase font-bold">
-                          <span className="text-emerald-700">{article.category}</span>
-                          <span>•</span>
-                          <span>{article.date}</span>
-                        </div>
-                        <h4 className="font-bold text-base text-stone-900 leading-snug">
-                          {article.title}
-                        </h4>
-                        <p className="text-xs text-stone-600 leading-relaxed">
-                          {article.content}
-                        </p>
-                        <div className="text-[10px] text-stone-400 font-mono pt-1">
-                          By {article.author}
-                        </div>
-                      </div>
-                    </div>
-                  ))}
-                </div>
-              </div>
-
-              {/* Right Side: Gatherings & Events */}
-              <div className="lg:col-span-5 space-y-6">
-                <h3 className="font-bold text-xl text-stone-900 border-b border-stone-200 pb-3">
-                  Advocacy Calendar &amp; Webinars
-                </h3>
-
-                <div className="space-y-4">
-                  {eventsStore.map((evt) => (
-                    <div key={evt.id} className="p-4 bg-white border border-stone-200 rounded-xl space-y-3 shadow-2xs hover:border-emerald-600/30 transition-all">
-                      <div className="flex justify-between items-center text-[10px] font-mono font-bold uppercase tracking-wider text-emerald-800">
-                        <span>{evt.category}</span>
-                        <span>{evt.date} • {evt.time}</span>
-                      </div>
-                      <div>
-                        <strong className="text-stone-950 text-sm block">{evt.title}</strong>
-                        <span className="text-xs text-stone-500 block leading-tight pt-1">{evt.description}</span>
-                      </div>
-                      <div className="flex justify-between items-center text-[10px] font-mono text-stone-500">
-                        <span>{evt.location}</span>
-                        <span className={`px-2 py-0.5 rounded uppercase font-bold ${evt.spotsLeft > 0 ? 'bg-emerald-50 text-emerald-800' : 'bg-stone-100 text-stone-400'}`}>
-                          {evt.spotsLeft > 0 ? `${evt.spotsLeft} Seats Left` : 'FULLY RESERVED'}
-                        </span>
-                      </div>
-                    </div>
-                  ))}
-                </div>
-              </div>
-            </section>
+          <div className="min-h-[60vh] flex items-center justify-center">
+            <div className="text-center space-y-4">
+              <span className="text-stone-400 text-xs font-mono tracking-widest uppercase">SECTION EMPTY</span>
+            </div>
           </div>
         )}
 
         {/* VIEW 8: GALLERY & MEDIA */}
         {currentPath === 'gallery' && (
-          <div className="space-y-16 pb-24">
-            <section className="bg-stone-900 text-white py-16 px-6 text-center">
-              <div className="max-w-4xl mx-auto space-y-4">
-                <span className="text-emerald-400 font-mono text-xs uppercase tracking-widest font-bold">
-                  VISUAL FIELD ARCHIVE
-                </span>
-                <h1 className="text-4xl sm:text-5xl font-extrabold tracking-tight">
-                  Field Photo &amp; Media Gallery
-                </h1>
-                <p className="max-w-xl mx-auto text-sm text-stone-300 font-light">
-                  A transparent view of solar well construction, classroom scholarships, and mobile clinic days.
-                </p>
-              </div>
-            </section>
-
-            <section className="max-w-7xl mx-auto px-6 space-y-8">
-              {/* Category Filter */}
-              <div className="flex flex-wrap justify-center gap-2 border-b border-stone-200 pb-4">
-                {['All', 'education', 'protection', 'health', 'community', 'events'].map((cat) => (
-                  <button
-                    key={cat}
-                    type="button"
-                    onClick={() => setGalleryFilter(cat)}
-                    className={`px-4 py-2 text-xs font-bold rounded-lg capitalize cursor-pointer transition-all ${
-                      galleryFilter === cat
-                        ? 'bg-stone-900 text-amber-400 shadow-xs'
-                        : 'bg-stone-100 text-stone-600 hover:bg-stone-200'
-                    }`}
-                  >
-                    {cat}
-                  </button>
-                ))}
-              </div>
-
-              {/* Grid */}
-              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 text-left">
-                {filteredGallery.map((img) => (
-                  <div 
-                    key={img.id} 
-                    className="bg-white border border-stone-200 rounded-2xl overflow-hidden shadow-2xs group cursor-pointer hover:shadow-md transition-all"
-                    onClick={() => setActiveLightbox(img)}
-                  >
-                    <div className="h-56 overflow-hidden relative bg-stone-900">
-                      <img src={img.imageUrl} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" alt={img.title} referrerPolicy="no-referrer" />
-                      <div className="absolute inset-0 bg-black/30 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
-                        <Eye className="w-8 h-8 text-white" />
-                      </div>
-                    </div>
-                    <div className="p-4 space-y-1">
-                      <strong className="text-xs text-stone-900 block font-bold">{img.title}</strong>
-                      <span className="text-[10px] text-stone-500 font-mono uppercase">{img.category}</span>
-                    </div>
-                  </div>
-                ))}
-              </div>
-
-              {/* Lightbox Modal */}
-              {activeLightbox && (
-                <div 
-                  className="fixed inset-0 bg-stone-950/95 backdrop-blur-md z-50 flex items-center justify-center p-4"
-                  onClick={() => setActiveLightbox(null)}
-                >
-                  <div className="max-w-3xl w-full space-y-4" onClick={(e) => e.stopPropagation()}>
-                    <div className="relative">
-                      <img src={activeLightbox.imageUrl} alt={activeLightbox.title} className="w-full max-h-[80vh] object-contain rounded-xl border border-stone-800" referrerPolicy="no-referrer" />
-                      <button
-                        type="button"
-                        onClick={() => setActiveLightbox(null)}
-                        className="absolute top-3 right-3 bg-white/95 text-stone-900 w-9 h-9 rounded-full font-bold flex items-center justify-center shadow-lg cursor-pointer hover:bg-stone-100"
-                      >
-                        ✕
-                      </button>
-                    </div>
-                    <div className="text-white text-center space-y-1">
-                      <h4 className="font-bold text-lg">{activeLightbox.title}</h4>
-                      <p className="text-stone-400 text-xs">{activeLightbox.description}</p>
-                    </div>
-                  </div>
-                </div>
-              )}
-            </section>
+          <div className="min-h-[60vh] flex items-center justify-center">
+            <div className="text-center space-y-4">
+              <span className="text-stone-400 text-xs font-mono tracking-widest uppercase">SECTION EMPTY</span>
+            </div>
           </div>
         )}
 
         {/* VIEW 9: DEDICATED DONATION & PLEDGE PORTAL */}
         {currentPath === 'donate' && (
-          <div className="space-y-16 pb-24">
-            <section className="bg-stone-900 text-white py-16 px-6 text-center">
-              <div className="max-w-4xl mx-auto space-y-4">
-                <span className="text-emerald-400 font-mono text-xs uppercase tracking-widest font-bold">
-                  DIRECT FIDUCIARY GIVING
-                </span>
-                <h1 className="text-4xl sm:text-5xl font-extrabold tracking-tight">
-                  Support ThriveKids Global
-                </h1>
-                <p className="max-w-xl mx-auto text-sm text-stone-300 font-light">
-                  87.2% of all resources flow directly into frontline field operations. 100% tax-deductible worldwide.
-                </p>
-              </div>
-            </section>
-
-            <div className="max-w-4xl mx-auto px-6">
-              <div className="bg-white border border-stone-200 rounded-2xl shadow-xl p-6 sm:p-10 space-y-8 text-left">
-                
-                {donateSuccess ? (
-                  <div className="text-center py-12 space-y-4">
-                    <div className="w-16 h-16 bg-emerald-500 text-white rounded-full flex items-center justify-center mx-auto text-3xl shadow-lg">
-                      <Check className="w-8 h-8 stroke-[3]" />
-                    </div>
-                    <h3 className="text-2xl font-bold text-stone-900">Thank You For Your Sustaining Support</h3>
-                    <p className="text-sm text-stone-600 max-w-md mx-auto">
-                      Your contribution has been logged in our secure ledger. An official tax receipt has been generated for your records.
-                    </p>
-                    <button
-                      type="button"
-                      onClick={() => handleNavigate('home')}
-                      className="px-6 py-2.5 bg-stone-900 text-white font-bold text-xs uppercase rounded-xl"
-                    >
-                      Return to Homepage
-                    </button>
-                  </div>
-                ) : (
-                  <form onSubmit={handleDedicatedDonateSubmit} className="space-y-8">
-                    
-                    {/* Frequency selector */}
-                    <div className="space-y-2">
-                      <label className="text-xs font-bold uppercase tracking-wider text-stone-500 block">Giving Frequency</label>
-                      <div className="grid grid-cols-2 gap-3">
-                        <button
-                          type="button"
-                          onClick={() => setDonateFreq('monthly')}
-                          className={`py-3.5 px-4 rounded-xl border-2 font-bold text-sm transition-all cursor-pointer text-center ${
-                            donateFreq === 'monthly'
-                              ? 'border-emerald-600 bg-emerald-50 text-emerald-950 ring-1 ring-emerald-600'
-                              : 'border-stone-200 bg-stone-50 text-stone-600 hover:bg-stone-100'
-                          }`}
-                        >
-                          Monthly Sustainer (Highest Impact)
-                        </button>
-                        <button
-                          type="button"
-                          onClick={() => setDonateFreq('one-time')}
-                          className={`py-3.5 px-4 rounded-xl border-2 font-bold text-sm transition-all cursor-pointer text-center ${
-                            donateFreq === 'one-time'
-                              ? 'border-emerald-600 bg-emerald-50 text-emerald-950 ring-1 ring-emerald-600'
-                              : 'border-stone-200 bg-stone-50 text-stone-600 hover:bg-stone-100'
-                          }`}
-                        >
-                          One-Time Contribution
-                        </button>
-                      </div>
-                    </div>
-
-                    {/* Amount selector */}
-                    <div className="space-y-3">
-                      <label className="text-xs font-bold uppercase tracking-wider text-stone-500 block">Select Gift Amount</label>
-                      <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
-                        {[25, 50, 100, 250].map((amt) => {
-                          const isSelected = donateAmount === amt && !donateCustom;
-                          return (
-                            <button
-                              key={amt}
-                              type="button"
-                              onClick={() => {
-                                setDonateAmount(amt);
-                                setDonateCustom('');
-                              }}
-                              className={`p-4 rounded-xl border-2 font-mono font-bold text-lg transition-all cursor-pointer text-center ${
-                                isSelected
-                                  ? 'border-stone-900 bg-stone-900 text-white shadow-sm'
-                                  : 'border-stone-200 bg-stone-50 text-stone-800 hover:bg-stone-100'
-                              }`}
-                            >
-                              ${amt}
-                              {donateFreq === 'monthly' && <span className="text-xs font-sans font-normal block text-stone-400">/month</span>}
-                            </button>
-                          );
-                        })}
-                      </div>
-
-                      <div className="pt-2">
-                        <label className="text-xs font-bold uppercase tracking-wider text-stone-500 mb-1 block">Or Custom Amount ($USD)</label>
-                        <div className="relative">
-                          <span className="absolute left-3 top-1/2 -translate-y-1/2 font-bold text-stone-400">$</span>
-                          <input
-                            type="number"
-                            min="5"
-                            placeholder="Other amount"
-                            value={donateCustom}
-                            onChange={(e) => setDonateCustom(e.target.value)}
-                            className="w-full pl-8 pr-4 py-3 bg-stone-50 border border-stone-300 rounded-xl text-sm font-bold text-stone-900"
-                          />
-                        </div>
-                      </div>
-                    </div>
-
-                    {/* Program Sector Designation */}
-                    <div className="space-y-2">
-                      <label className="text-xs font-bold uppercase tracking-wider text-stone-500 block">Direct Fund Toward Specific Program</label>
-                      <select
-                        value={donateSector}
-                        onChange={(e) => setDonateSector(e.target.value)}
-                        className="w-full p-3 bg-stone-50 border border-stone-300 rounded-xl text-xs font-medium text-stone-800"
-                      >
-                        <option value="general">Where Needed Most (Emergency Relief &amp; Operations)</option>
-                        <option value="education">Education &amp; Solar Computer Classrooms</option>
-                        <option value="health">Pediatric Health, Nutrition &amp; Mobile Clinics</option>
-                        <option value="water">Clean Water Solar Boreholes</option>
-                        <option value="family">Mother-Led Microfinance Cooperatives</option>
-                      </select>
-                    </div>
-
-                    {/* Submit button */}
-                    <button
-                      type="submit"
-                      className="w-full py-4 bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-sm uppercase tracking-wider rounded-xl shadow-lg transition-all flex items-center justify-center gap-2 cursor-pointer"
-                    >
-                      <Heart className="w-4 h-4 fill-white" />
-                      <span>Confirm ${donateCustom || donateAmount} {donateFreq === 'monthly' ? '/ Month' : 'Contribution'}</span>
-                    </button>
-
-                    <div className="border-t border-stone-100 pt-4 flex flex-wrap justify-between items-center text-xs text-stone-400 gap-2">
-                      <div className="flex items-center gap-1.5">
-                        <ShieldCheck className="w-4 h-4 text-emerald-600" />
-                        <span>Secure 256-Bit SSL Encryption</span>
-                      </div>
-                      <span>501(c)(3) / UK Charity Tax Receipts Generated</span>
-                    </div>
-
-                  </form>
-                )}
-
-              </div>
+          <div className="min-h-[60vh] flex items-center justify-center">
+            <div className="text-center space-y-4">
+              <span className="text-stone-400 text-xs font-mono tracking-widest uppercase">SECTION EMPTY</span>
             </div>
           </div>
         )}
 
         {/* VIEW 10: LEGAL & SAFEGUARDING CHARTER */}
         {currentPath === 'legal' && (
-          <div className="space-y-16 pb-24">
-            <section className="bg-stone-900 text-white py-16 px-6 text-center">
-              <div className="max-w-3xl mx-auto space-y-3">
-                <span className="text-amber-400 font-mono text-xs uppercase tracking-widest font-bold">STANDARDS</span>
-                <h1 className="text-3xl sm:text-4xl font-extrabold tracking-tight capitalize">
-                  {currentSubPath || 'Regulatory Policy'} Codes
-                </h1>
-                <p className="text-xs text-stone-400">
-                  Reviewed and audited annually for international charity regulatory compliance.
-                </p>
-              </div>
-            </section>
-
-            <section className="max-w-3xl mx-auto px-6 bg-white p-8 rounded-2xl border border-stone-200 text-left">
-              <div className="space-y-6 text-xs text-stone-700 leading-relaxed font-sans">
-                <h3 className="font-bold text-lg text-stone-900">1. Core Child Safeguarding and Exploitation Prevention Charter</h3>
-                <p>In accordance with UNICEF child shielding protocols, ThriveKids operates on a strict absolute threshold for safety:</p>
-                <ul className="list-disc pl-5 space-y-2">
-                  <li><strong>Complete visual protection:</strong> Surnames, school name tags, and geographical GPS coordinates are strictly redacted from public sponsor profiles to avoid tracking risks.</li>
-                  <li><strong>Universal background checks:</strong> Mandatory national police background clearances for every social worker, clinician, teacher, borehole contractor, and volunteer.</li>
-                  <li><strong>Direct whistleblower channel:</strong> Dedicated independent safeguarding reporting line routing directly to Governance Chairperson Sarah Jenkins-Hume, JD.</li>
-                </ul>
-              </div>
-            </section>
+          <div className="min-h-[60vh] flex items-center justify-center">
+            <div className="text-center space-y-4">
+              <span className="text-stone-400 text-xs font-mono tracking-widest uppercase">SECTION EMPTY</span>
+            </div>
           </div>
         )}
 

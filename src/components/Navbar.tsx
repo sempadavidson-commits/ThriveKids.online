@@ -38,19 +38,19 @@ export default function Navbar({
         {/* Brand Monogram */}
         <div 
           onClick={() => handleLinkClick('home')}
-          className="cursor-pointer select-none text-left flex items-center gap-3"
+          className="cursor-pointer select-none text-left flex flex-col justify-center"
+          style={{ fontFamily: '"Roboto", sans-serif' }}
         >
-          <div className="w-10 h-10 rounded-xl bg-stone-900 text-white flex items-center justify-center font-bold font-mono text-base border border-stone-800 shadow-sm">
-            <span className="text-emerald-400 font-extrabold">T</span>K
+          <div className="flex items-baseline leading-none">
+            <span className="text-stone-950 font-black text-3xl tracking-tighter" style={{ color: '#000000', fontWeight: 900 }}>T</span>
+            <span className="text-emerald-600 font-black text-3xl tracking-tighter ml-0.5" style={{ color: '#10b981', fontWeight: 900 }}>K</span>
           </div>
-          <div>
-            <span className="font-sans font-black text-lg md:text-xl tracking-tight text-stone-950 block leading-tight">
-              THRIVEKIDS
-            </span>
-            <span className="font-mono text-[9px] uppercase tracking-[0.25em] text-emerald-600 font-bold block leading-none">
-              GLOBAL FOUNDATION
-            </span>
-          </div>
+          <span 
+            className="text-[9px] font-bold tracking-widest text-stone-600 uppercase leading-none block mt-1"
+            style={{ letterSpacing: '0.12em' }}
+          >
+            FOUNDATION (UG)
+          </span>
         </div>
 
         {/* Desktop Navigation Items */}
