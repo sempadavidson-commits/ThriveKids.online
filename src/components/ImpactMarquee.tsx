@@ -19,7 +19,7 @@ const QUOTES = [
 
 export default function ImpactMarquee() {
   return (
-    <section className="bg-[#fcfbfa] py-8 sm:py-12 overflow-hidden select-none">
+    <section className="bg-[#fcfbfa] dark:bg-[#0c0a09] py-8 sm:py-12 overflow-hidden select-none transition-colors duration-300">
       <style>{`
         @keyframes scroll-left {
           0% { transform: translateX(0); }
@@ -44,7 +44,7 @@ export default function ImpactMarquee() {
 
       <div className="space-y-6">
         {/* Top Marquee: Left-to-Right Scrolling (scroll-right-fast) */}
-        <div className="relative py-3 bg-stone-900 shadow-md">
+        <div className="relative py-3 bg-stone-900 dark:bg-stone-950 shadow-md">
           <div className="overflow-hidden w-full">
             <div className="marquee-container scroll-right-fast">
               {/* Duplicate contents once for seamless loop */}
@@ -63,9 +63,9 @@ export default function ImpactMarquee() {
           <div className="overflow-hidden w-full">
             <div className="marquee-container scroll-left-fast">
               {[...QUOTES, ...QUOTES].map((quote, idx) => (
-                <div key={idx} className="flex items-center gap-6 text-stone-700 text-sm sm:text-base font-editorial italic">
+                <div key={idx} className="flex items-center gap-6 text-stone-700 dark:text-stone-300 text-sm sm:text-base font-editorial italic">
                   <span>{quote}</span>
-                  <span className="text-stone-300 font-sans tracking-tight not-italic">•</span>
+                  <span className="text-stone-300 dark:text-stone-600 font-sans tracking-tight not-italic">•</span>
                 </div>
               ))}
             </div>

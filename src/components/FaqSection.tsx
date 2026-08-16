@@ -70,24 +70,24 @@ export default function FaqSection() {
   };
 
   return (
-    <section id="faq" className="relative py-20 sm:py-28 px-4 sm:px-8 lg:px-12 max-w-5xl mx-auto select-none">
+    <section id="faq" className="relative py-20 sm:py-28 px-4 sm:px-8 lg:px-12 max-w-5xl mx-auto select-none transition-colors duration-300">
       
       {/* Header */}
       <div className="text-center space-y-4 mb-12 sm:mb-16">
-        <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-emerald-50 text-emerald-800 text-xs font-mono font-bold tracking-widest uppercase">
-          <HelpCircle className="w-3.5 h-3.5 text-emerald-600" />
+        <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-emerald-50 dark:bg-emerald-950/50 text-emerald-800 dark:text-emerald-300 text-xs font-mono font-bold tracking-widest uppercase">
+          <HelpCircle className="w-3.5 h-3.5 text-emerald-600 dark:text-emerald-400" />
           <span>TRANSPARENCY &amp; ALLOCATION FAQ</span>
         </div>
 
-        <h2 className="text-3xl sm:text-4xl lg:text-5xl font-black text-stone-900 tracking-tight leading-tight">
+        <h2 className="text-3xl sm:text-4xl lg:text-5xl font-black text-stone-900 dark:text-white tracking-tight leading-tight transition-colors">
           Frequently Asked Questions
         </h2>
 
-        <p className="text-stone-600 text-sm sm:text-base font-light max-w-2xl mx-auto leading-relaxed">
+        <p className="text-stone-600 dark:text-stone-300 text-sm sm:text-base font-light max-w-2xl mx-auto leading-relaxed transition-colors">
           Clear answers about how we allocate donor funds, verify project outcomes, and uphold absolute transparency across our grassroots programs.
         </p>
 
-        {/* Category Pills (No borders, clean background tabs) */}
+        {/* Category Pills */}
         <div className="pt-4 flex flex-wrap justify-center gap-2">
           {categories.map((cat) => (
             <button
@@ -96,8 +96,8 @@ export default function FaqSection() {
               onClick={() => setActiveCategory(cat)}
               className={`px-4 py-2 rounded-full text-xs font-semibold tracking-wide transition-all cursor-pointer ${
                 activeCategory === cat
-                  ? 'bg-stone-900 text-white shadow-sm'
-                  : 'bg-stone-100 hover:bg-stone-200 text-stone-700'
+                  ? 'bg-stone-900 dark:bg-emerald-600 text-white shadow-sm'
+                  : 'bg-stone-100 dark:bg-stone-800 hover:bg-stone-200 dark:hover:bg-stone-700 text-stone-700 dark:text-stone-300'
               }`}
             >
               {cat}
@@ -106,7 +106,7 @@ export default function FaqSection() {
         </div>
       </div>
 
-      {/* Accordion List (Borderless, Space-saving & Readable) */}
+      {/* Accordion List */}
       <div className="space-y-3">
         {filteredFaqs.map((faq, index) => {
           const isOpen = openId === faq.id;
@@ -116,7 +116,7 @@ export default function FaqSection() {
               initial={{ opacity: 0, y: 10 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.3, delay: index * 0.05 }}
-              className="overflow-hidden rounded-2xl bg-stone-100/70 hover:bg-stone-100 transition-colors"
+              className="overflow-hidden rounded-2xl bg-stone-100/70 dark:bg-stone-900/80 hover:bg-stone-100 dark:hover:bg-stone-900 transition-colors"
             >
               <button
                 type="button"
@@ -125,17 +125,17 @@ export default function FaqSection() {
                 aria-expanded={isOpen}
               >
                 <div className="space-y-1 pr-2">
-                  <span className="text-[10px] font-mono font-bold text-emerald-700 tracking-widest uppercase block">
+                  <span className="text-[10px] font-mono font-bold text-emerald-700 dark:text-emerald-400 tracking-widest uppercase block">
                     {faq.category}
                   </span>
-                  <span className="text-base sm:text-lg font-bold text-stone-900 leading-snug block">
+                  <span className="text-base sm:text-lg font-bold text-stone-900 dark:text-white leading-snug block transition-colors">
                     {faq.question}
                   </span>
                 </div>
 
                 <div 
                   className={`w-9 h-9 rounded-full flex items-center justify-center shrink-0 transition-transform duration-300 ${
-                    isOpen ? 'rotate-180 bg-stone-900 text-white' : 'bg-stone-200/80 text-stone-700'
+                    isOpen ? 'rotate-180 bg-stone-900 dark:bg-emerald-600 text-white' : 'bg-stone-200/80 dark:bg-stone-800 text-stone-700 dark:text-stone-300'
                   }`}
                 >
                   <ChevronDown className="w-4 h-4" />
@@ -152,12 +152,12 @@ export default function FaqSection() {
                     transition={{ duration: 0.35, ease: 'easeInOut' }}
                     className="overflow-hidden"
                   >
-                    <div className="px-6 sm:px-8 pb-6 pt-1 text-stone-600 text-sm sm:text-base font-light leading-relaxed space-y-3">
+                    <div className="px-6 sm:px-8 pb-6 pt-1 text-stone-600 dark:text-stone-300 text-sm sm:text-base font-light leading-relaxed space-y-3">
                       <p>{faq.answer}</p>
                       
                       {faq.highlight && (
-                        <div className="flex items-center gap-2 text-xs font-mono font-bold text-emerald-800 pt-1">
-                          <CheckCircle2 className="w-4 h-4 text-emerald-600 shrink-0" />
+                        <div className="flex items-center gap-2 text-xs font-mono font-bold text-emerald-800 dark:text-emerald-300 pt-1">
+                          <CheckCircle2 className="w-4 h-4 text-emerald-600 dark:text-emerald-400 shrink-0" />
                           <span>{faq.highlight}</span>
                         </div>
                       )}

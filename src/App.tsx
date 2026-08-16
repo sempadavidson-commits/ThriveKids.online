@@ -342,7 +342,7 @@ export default function App() {
   };
 
   return (
-    <div className="min-h-screen bg-[#fcfbfa] text-stone-900 flex flex-col font-sans selection:bg-emerald-600 selection:text-white antialiased">
+    <div className="min-h-screen bg-[#fcfbfa] dark:bg-[#0c0a09] text-stone-900 dark:text-stone-100 flex flex-col font-sans selection:bg-emerald-600 selection:text-white antialiased transition-colors duration-300">
       
       {/* GLOBAL TOP NAVIGATION */}
       <Navbar 
@@ -356,14 +356,14 @@ export default function App() {
         
         {/* VIEW 1: COMPLETE HOME PAGE WITH ALL NEW SECTIONS */}
         {currentPath === 'home' && (
-          <div className="space-y-0 relative overflow-hidden bg-[#fcfbfa]">
+          <div className="space-y-0 relative overflow-hidden bg-[#fcfbfa] dark:bg-[#0c0a09] transition-colors duration-300">
             
             {/* Ambient Background Blur Blobs */}
-            <div className="absolute top-[10%] left-[5%] w-[35rem] h-[35rem] bg-emerald-500/5 rounded-full blur-[100px] pointer-events-none" />
-            <div className="absolute top-[30%] right-[5%] w-[40rem] h-[40rem] bg-amber-500/5 rounded-full blur-[120px] pointer-events-none" />
-            <div className="absolute top-[50%] left-[8%] w-[30rem] h-[30rem] bg-indigo-500/5 rounded-full blur-[90px] pointer-events-none" />
-            <div className="absolute top-[75%] right-[10%] w-[38rem] h-[38rem] bg-emerald-500/5 rounded-full blur-[110px] pointer-events-none" />
-            <div className="absolute bottom-[5%] left-[10%] w-[32rem] h-[32rem] bg-amber-500/5 rounded-full blur-[100px] pointer-events-none" />
+            <div className="absolute top-[10%] left-[5%] w-[35rem] h-[35rem] bg-emerald-500/5 dark:bg-emerald-500/10 rounded-full blur-[100px] pointer-events-none" />
+            <div className="absolute top-[30%] right-[5%] w-[40rem] h-[40rem] bg-amber-500/5 dark:bg-amber-500/10 rounded-full blur-[120px] pointer-events-none" />
+            <div className="absolute top-[50%] left-[8%] w-[30rem] h-[30rem] bg-indigo-500/5 dark:bg-indigo-500/10 rounded-full blur-[90px] pointer-events-none" />
+            <div className="absolute top-[75%] right-[10%] w-[38rem] h-[38rem] bg-emerald-500/5 dark:bg-emerald-500/10 rounded-full blur-[110px] pointer-events-none" />
+            <div className="absolute bottom-[5%] left-[10%] w-[32rem] h-[32rem] bg-amber-500/5 dark:bg-amber-500/10 rounded-full blur-[100px] pointer-events-none" />
 
             {/* HERO BANNER */}
             <div id="hero" className="relative z-10">
