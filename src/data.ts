@@ -243,6 +243,16 @@ export const INITIAL_PROGRAMS: Program[] = [
 
 export const INITIAL_TEAM: TeamMember[] = [
   {
+    id: 'ceo-1',
+    name: 'Davidson Sempa',
+    role: 'Founder & Chief Executive Officer (CEO)',
+    category: 'leadership',
+    biography: 'Visionary founder and Chief Executive Officer of Thrive Kids Foundation. A grassroots pioneer whose proven influence has rescued hundreds of ghetto and homeless youth, transforming vulnerable lives into skilled scholars, artisans, and community leaders while uplifting thousands of struggling families.',
+    image: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&q=80&w=400',
+    email: 'ceo@thrivekidsglobal.org',
+    socialLinks: { linkedin: 'https://linkedin.com/company/thrive-kids-foundation' }
+  },
+  {
     id: 'exec-1',
     name: 'Dr. Helen Vance, PhD',
     role: 'Executive Director & Co-Founder',

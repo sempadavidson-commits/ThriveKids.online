@@ -19,7 +19,7 @@ const QUOTES = [
 
 export default function ImpactMarquee() {
   return (
-    <section className="bg-[#fcfbfa] py-8 sm:py-12 border-t border-b border-stone-200 overflow-hidden select-none">
+    <section className="bg-[#fcfbfa] py-8 sm:py-12 overflow-hidden select-none">
       <style>{`
         @keyframes scroll-left {
           0% { transform: translateX(0); }
@@ -44,7 +44,7 @@ export default function ImpactMarquee() {
 
       <div className="space-y-6">
         {/* Top Marquee: Left-to-Right Scrolling (scroll-right-fast) */}
-        <div className="relative py-3 bg-stone-900 border-t border-b border-stone-800">
+        <div className="relative py-3 bg-stone-900 shadow-md">
           <div className="overflow-hidden w-full">
             <div className="marquee-container scroll-right-fast">
               {/* Duplicate contents once for seamless loop */}
