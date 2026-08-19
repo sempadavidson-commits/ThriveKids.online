@@ -6,26 +6,27 @@ import dotenv from 'dotenv';
 
 dotenv.config();
 
-const app = express();
-const PORT = 3000;
-
-app.use(express.json());
-
-// Initialize Google GenAI
-const ai = new GoogleGenAI({
-  apiKey: process.env.GEMINI_API_KEY,
-  httpOptions: {
-    headers: {
-      'User-Agent': 'aistudio-build',
-    }
+let aiClient: GoogleGenAI | null = null;
+function getAI(): GoogleGenAI {
+  if (!aiClient) {
+    const key = process.env.GEMINI_API_KEY || '';
+    aiClient = new GoogleGenAI({
+      apiKey: key,
+      httpOptions: {
+        headers: {
+          'User-Agent': 'aistudio-build',
+        },
+      },
+    });
   }
-});
+  return aiClient;
+}
 
 // Authoritative Context Base representation
 const STRUCTURAL_KNOWLEDGE_BASE = `
 You are the official Compliance Auditor and Philanthropy Advisor for ThriveKids Global Foundation.
 ThriveKids Global Foundation is a highly respected, internationally registered 501(c)(3) nonprofit digital platform supporting children and vulnerable families.
-Your tone should be highly professional, objective, objective yet deeply compassionate, non-commercial, and elite. Keep your responses structured with clean Markdown.
+Your tone should be highly professional, objective yet deeply compassionate, non-commercial, and elite. Keep your responses structured with clean Markdown.
 
 Authoritative Database Resources:
 1. Programs:
@@ -51,66 +52,84 @@ Authoritative Database Resources:
 Always limit your answers to what is described in this profile of ThriveKids, and gracefully decline to answer questions completely unrelated to charity, children support, or the foundation. Give specific numbers when requested (e.g. 87.2% efficiency, 1,420 scholarships, 110 wells, 18.2K toddlers).
 `;
 
-// AI Advisor endpoint
-app.post('/api/advisor', async (req, res) => {
-  try {
-    const { message, chatHistory } = req.body;
-    if (!message) {
-      res.status(400).json({ error: 'Message is required' });
-      return;
-    }
+async function startServer() {
+  const app = express();
+  const PORT = 3000;
 
-    const contents = [];
-    
-    // Convert incoming history structure into Gemini Content structure if present
-    if (chatHistory && Array.isArray(chatHistory)) {
-      chatHistory.forEach(item => {
-        contents.push({
-          role: item.role === 'user' ? 'user' : 'model',
-          parts: [{ text: item.content }]
-        });
-      });
-    }
-    
-    contents.push({
-      role: 'user',
-      parts: [{ text: message }]
-    });
+  app.use(express.json());
 
-    const response = await ai.models.generateContent({
-      model: 'gemini-3.5-flash',
-      contents: contents,
-      config: {
-        systemInstruction: STRUCTURAL_KNOWLEDGE_BASE,
-        temperature: 0.2,
-      },
-    });
-
-    const generatedText = response.text || "Compliance advisor holds no further clearance on this specific record.";
-    res.json({ text: generatedText });
-  } catch (error: any) {
-    console.error('Advisor API Exception:', error);
-    res.status(500).json({ error: error.message || 'Auditing pipeline error' });
-  }
-});
-
-// Serve static assets in production or mount Vite middleware in development
-const isProd = process.env.NODE_ENV === 'production';
-if (!isProd) {
-  createViteServer({
-    server: { middlewareMode: true },
-    appType: 'spa',
-  }).then((vite) => {
-    app.use(vite.middlewares);
+  // Health check
+  app.get('/api/health', (_req, res) => {
+    res.json({ status: 'ok', timestamp: new Date().toISOString() });
   });
-} else {
-  const distPath = path.join(process.cwd(), 'dist');
-  app.use(express.static(distPath));
-  app.get('*', (req, res) => {
-    res.sendFile(path.join(distPath, 'index.html'));
+
+  // AI Advisor endpoint
+  app.post('/api/advisor', async (req, res) => {
+    try {
+      const { message, chatHistory } = req.body;
+      if (!message) {
+        res.status(400).json({ error: 'Message is required' });
+        return;
+      }
+
+      const contents = [];
+      
+      // Convert incoming history structure into Gemini Content structure if present
+      if (chatHistory && Array.isArray(chatHistory)) {
+        chatHistory.forEach((item: { role: string; content: string }) => {
+          contents.push({
+            role: item.role === 'user' ? 'user' : 'model',
+            parts: [{ text: item.content }]
+          });
+        });
+      }
+      
+      contents.push({
+        role: 'user',
+        parts: [{ text: message }]
+      });
+
+      const ai = getAI();
+      const response = await ai.models.generateContent({
+        model: 'gemini-2.5-flash',
+        contents: contents,
+        config: {
+          systemInstruction: STRUCTURAL_KNOWLEDGE_BASE,
+          temperature: 0.2,
+        },
+      });
+
+      const generatedText = response.text || 'Compliance advisor holds no further clearance on this specific record.';
+      res.json({ text: generatedText });
+    } catch (error: any) {
+      console.error('Advisor API Exception:', error);
+      res.status(500).json({ error: error.message || 'Auditing pipeline error' });
+    }
+  });
+
+  // Serve static assets in production or mount Vite middleware in development
+  const isProd = process.env.NODE_ENV === 'production';
+  if (!isProd) {
+    const vite = await createViteServer({
+      server: { middlewareMode: true },
+      appType: 'spa',
+    });
+    app.use(vite.middlewares);
+  } else {
+    const distPath = path.join(process.cwd(), 'dist');
+    app.use(express.static(distPath));
+    app.get('*', (_req, res) => {
+      res.sendFile(path.join(distPath, 'index.html'));
+    });
+  }
+
+  app.listen(PORT, '0.0.0.0', () => {
+    console.log(`Server running on port ${PORT} (host: 0.0.0.0)`);
   });
 }
 
-const serverInstance = app.listen(PORT, '0.0.0.0', () => {
-  console.log(`Compliance platform online on host 0.0.0.0 port ${PORT}`);
+startServer().catch((err) => {
+  console.error('Fatal Server Boot Error:', err);
+  process.exit(1);
 });
+
