@@ -53,12 +53,9 @@ export default function UrgentCampaign({ onPledge }: UrgentCampaignProps) {
 
           {/* Progress Bar */}
           <div className="w-full h-3 bg-stone-800 rounded-full overflow-hidden relative">
-            <motion.div 
-              initial={{ width: 0 }}
-              whileInView={{ width: `${percentage}%` }}
-              viewport={{ once: true }}
-              transition={{ duration: 1.5, ease: 'easeOut' }}
-              className="h-full bg-gradient-to-r from-emerald-500 to-amber-400 rounded-full"
+            <div 
+              style={{ width: `${percentage}%` }}
+              className="h-full bg-gradient-to-r from-emerald-500 to-amber-400 rounded-full transition-all duration-500"
             />
           </div>
 

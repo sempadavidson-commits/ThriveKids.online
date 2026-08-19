@@ -36,12 +36,15 @@ interface ToastItemProps {
 }
 
 function ToastItem({ toast, onRemove }: ToastItemProps) {
+  const onRemoveRef = React.useRef(onRemove);
+  onRemoveRef.current = onRemove;
+
   useEffect(() => {
     const timer = setTimeout(() => {
-      onRemove(toast.id);
+      onRemoveRef.current(toast.id);
     }, 4500);
     return () => clearTimeout(timer);
-  }, [toast.id, onRemove]);
+  }, [toast.id]);
 
   const icons = {
     success: <Check className="w-4 h-4 text-emerald-500" />,

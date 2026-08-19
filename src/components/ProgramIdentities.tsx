@@ -25,14 +25,14 @@ export default function ProgramIdentities({ programs, initialSelectedId = 'educa
   };
 
   const sectorLabels: Record<string, string> = {
-    education: 'Sector 01 — Scholarship',
-    health: 'Sector 02 — Medical',
-    protection: 'Sector 03 — Safeguarding',
-    family: 'Sector 04 — Livelihoods',
-    community: 'Sector 05 — Infrastructure',
-    conservation: 'Sector 06 — Conservation',
-    sports: 'Sector 07 — Youth Sports',
-    creative: 'Sector 08 — Arts & Startups'
+    education: 'Sector 01: Scholarship',
+    health: 'Sector 02: Medical',
+    protection: 'Sector 03: Safeguarding',
+    family: 'Sector 04: Livelihoods',
+    community: 'Sector 05: Infrastructure',
+    conservation: 'Sector 06: Conservation',
+    sports: 'Sector 07: Youth Sports',
+    creative: 'Sector 08: Arts & Startups'
   };
 
   return (

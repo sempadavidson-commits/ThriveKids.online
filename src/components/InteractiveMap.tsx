@@ -1,171 +1,282 @@
-import React from 'react';
-import { GEOGRAPHIC_IMPACT } from '../data';
+import React, { useState } from 'react';
+
+interface ImpactLocation {
+  id: string;
+  name: string;
+  country: string;
+  region: string;
+  x: number; // SVG percentage coordinate X (0 - 100)
+  y: number; // SVG percentage coordinate Y (0 - 60)
+  beneficiaries: string;
+  focus: string;
+  isHQ?: boolean;
+}
+
+const IMPACT_LOCATIONS: ImpactLocation[] = [
+  {
+    id: 'uganda-hq',
+    name: 'Kampala Grassroots Hub',
+    country: 'Uganda',
+    region: 'East Africa',
+    x: 55.5,
+    y: 33.2,
+    beneficiaries: '5,200 Children',
+    focus: 'Direct Shelter & Feeding Corridors',
+    isHQ: true,
+  },
+  {
+    id: 'kenya',
+    name: 'Nairobi Urban Haven',
+    country: 'Kenya',
+    region: 'East Africa',
+    x: 57.0,
+    y: 34.5,
+    beneficiaries: '3,800 Children',
+    focus: 'Mobile Medical & Nutrition Units',
+  },
+  {
+    id: 'nigeria',
+    name: 'Lagos Coastal Support',
+    country: 'Nigeria',
+    region: 'West Africa',
+    x: 46.5,
+    y: 31.5,
+    beneficiaries: '2,950 Children',
+    focus: 'Clean Aquifers & Education Kits',
+  },
+  {
+    id: 'south-africa',
+    name: 'Cape Town Youth Centre',
+    country: 'South Africa',
+    region: 'Southern Africa',
+    x: 52.0,
+    y: 52.0,
+    beneficiaries: '2,400 Children',
+    focus: 'Trauma Counseling & Arts Therapy',
+  },
+  {
+    id: 'india',
+    name: 'Mumbai Learning Studio',
+    country: 'India',
+    region: 'South Asia',
+    x: 69.5,
+    y: 27.5,
+    beneficiaries: '3,400 Children',
+    focus: 'Digital STEM Literacy Labs',
+  },
+  {
+    id: 'philippines',
+    name: 'Manila Child Sanctuary',
+    country: 'Philippines',
+    region: 'Southeast Asia',
+    x: 83.5,
+    y: 32.0,
+    beneficiaries: '2,100 Children',
+    focus: 'Disaster Refuge & Daily Breakfast',
+  },
+  {
+    id: 'guatemala',
+    name: 'Highland Hope Academy',
+    country: 'Guatemala',
+    region: 'Central America',
+    x: 21.0,
+    y: 32.5,
+    beneficiaries: '1,750 Children',
+    focus: 'Indigenous Multilingual Classes',
+  },
+  {
+    id: 'uk-office',
+    name: 'European Donor Coalition',
+    country: 'United Kingdom',
+    region: 'Europe',
+    x: 46.8,
+    y: 14.5,
+    beneficiaries: 'Strategic Hub',
+    focus: 'International Governance & Auditing',
+  },
+  {
+    id: 'us-office',
+    name: 'Americas Trust Office',
+    country: 'United States',
+    region: 'North America',
+    x: 25.0,
+    y: 19.5,
+    beneficiaries: 'Grant Center',
+    focus: 'Institutional Philanthropy & Rights',
+  },
+];
 
 export default function InteractiveMap() {
+  const [activeLocation, setActiveLocation] = useState<ImpactLocation | null>(null);
+
+  const hqLocation = IMPACT_LOCATIONS.find((loc) => loc.isHQ) || IMPACT_LOCATIONS[0];
+
   return (
-    <div className="bg-[#fcfbfa] border border-stone-220 rounded-sm p-6 sm:p-10 shadow-lg">
-      <div className="flex flex-col md:flex-row justify-between items-start md:items-end gap-6 mb-10 border-b border-stone-200 pb-6">
-        <div className="max-w-xl text-left">
-          <span className="text-[10px] font-mono uppercase tracking-[0.3em] text-[#10b981] font-bold block mb-2">
-            05 / GEOCLASS SYSTEM
-          </span>
-          <h3 className="font-sans font-bold text-2xl sm:text-4xl text-stone-900 tracking-tight leading-tight">
-            Community Map
-          </h3>
-          <p className="font-sans text-xs sm:text-sm text-stone-550 mt-2">
-            Continuous global live connectivity mapping the exact physical outposts and direct relief corridors served by ThriveKids. Real-time telemetry connection vectors flow directly from our Global Trust Center.
-          </p>
-        </div>
-      </div>
+    <section className="w-full relative py-8 sm:py-14 px-2 sm:px-6 lg:px-12 select-none overflow-hidden font-[Roboto,sans-serif]">
+      <style>{`
+        @keyframes pulse-ring {
+          0% { r: 1.2; opacity: 0.9; }
+          100% { r: 4.8; opacity: 0; }
+        }
+        @keyframes dash-flow {
+          0% { stroke-dashoffset: 40; }
+          100% { stroke-dashoffset: 0; }
+        }
+        .map-ping-ring {
+          animation: pulse-ring 2.2s cubic-bezier(0.2, 0.6, 0.35, 1) infinite;
+        }
+        .map-dash-stream {
+          stroke-dasharray: 4, 3;
+          animation: dash-flow 3s linear infinite;
+        }
+      `}</style>
 
-      {/* Full-width Realistic Style World Map Container */}
-      <div className="w-full bg-stone-950 rounded-sm relative p-4 border border-stone-900 overflow-hidden min-h-[350px] sm:min-h-[480px] flex flex-col justify-between scanline-effect">
+      {/* Clean Borderless Map Container */}
+      <div className="w-full max-w-6xl mx-auto relative flex flex-col items-center justify-center">
         
-        {/* Subtle grid lines background overlay */}
-        <div className="absolute inset-0 grid grid-cols-12 grid-rows-6 opacity-[0.03] pointer-events-none">
-          {Array.from({ length: 72 }).map((_, i) => (
-            <div key={i} className="border-t border-l border-white"></div>
-          ))}
-        </div>
+        {/* Interactive SVG World Map */}
+        <div className="w-full relative">
+          <svg
+            viewBox="0 0 100 60"
+            className="w-full h-auto drop-shadow-sm"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <defs>
+              <linearGradient id="mapArcGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" stopColor="#10b981" stopOpacity="0.7" />
+                <stop offset="100%" stopColor="#f59e0b" stopOpacity="0.7" />
+              </linearGradient>
+            </defs>
 
-        {/* Floating coordinates indicator labels */}
-        <div className="flex justify-between items-center text-[9px] font-mono tracking-wider text-stone-500 relative z-10 p-2">
-          <span>SYSTEM CORRIDOR STATUS: GREEN</span>
-          <span>LATENCY OVERRIDE: STABLE</span>
-        </div>
-
-        {/* Map SVG element */}
-        <div className="w-full flex justify-center items-center my-auto p-2 sm:p-6">
-          <svg className="w-full h-auto max-w-[850px]" viewBox="0 0 100 60" xmlns="http://www.w3.org/2000/svg">
-            
-            <style>{`
-              @keyframes line-flow {
-                0% { stroke-dashoffset: 60; }
-                100% { stroke-dashoffset: 0; }
-              }
-              @keyframes pulse-ring {
-                0% { r: 1.5; opacity: 0.8; }
-                100% { r: 6; opacity: 0; }
-              }
-              .telemetry-link {
-                stroke-dasharray: 6, 4;
-                animation: line-flow 3.5s linear infinite;
-              }
-              .ping-ring {
-                animation: pulse-ring 2s cubic-bezier(0.215, 0.61, 0.355, 1) infinite;
-              }
-            `}</style>
-
-            {/* HIGHLY REALISTIC CONTINENT OUTLINES (Sleek Dark Mode Stylization) */}
-            <g fill="#1a1816" stroke="#2a2724" strokeWidth="0.25">
+            {/* Continents (Stylized Smooth Clean Geometry) */}
+            <g className="fill-stone-200 dark:fill-stone-800 transition-colors duration-300">
               {/* North America */}
-              <path d="M 5 22 C 5 15, 8 13, 12 11 Q 16 10, 20 12 T 26 15 T 30 14 T 30 20 T 26 23 T 23 26 T 17 28 T 12 28 Z" />
-              {/* Central America connection */}
-              <path d="M 23 26 Q 22 28, 22 30 T 21 33 T 22 35 Z" />
+              <path d="M 6 18 C 8 13, 14 9, 21 10 Q 28 11, 33 13 T 34 21 T 29 25 T 23 28 T 15 27 T 8 24 Z" />
+              {/* Central America */}
+              <path d="M 23 28 Q 21 31, 20 34 T 23 37 Z" />
               {/* South America */}
-              <path d="M 22 35 C 24 35, 26 38, 27 41 Q 28 44, 29 48 T 26 56 T 22 50 T 20 44 T 21 38 Z" />
-              {/* Eurasia (Europe + Asia) */}
-              <path d="M 37 12 C 40 8, 45 8, 50 10 Q 55 12, 60 11 T 65 9 T 72 10 T 78 8 T 85 10 T 92 12 T 96 17 T 95 24 T 91 30 T 85 34 T 78 32 T 72 30 T 65 31 T 56 27 T 48 24 T 42 21 T 36 17 Z" strokeLinejoin="round" />
-              {/* United Kingdom & Ireland */}
-              <path d="M 41 12 Q 43 11, 44 12 T 42 14 Z M 39 13 Q 40 13, 41 14 Z" />
-              {/* Japan */}
-              <path d="M 88 17 Q 89 21, 88 24" />
-              {/* Indonesia & Southern Islands */}
-              <path d="M 76 34 Q 78 35, 80 34" />
-              <path d="M 82 32 Q 84 31, 86 33" />
-              {/* Africa */}
-              <path d="M 40 22 C 45 20, 51 21, 54 25 Q 56 28, 55 33 T 50 43 T 47 48 T 45 42 T 41 33 T 39 27 Z" />
-              {/* Madagascar */}
-              <path d="M 55 42 Q 56 46, 54 48 Z" />
-              {/* Australia */}
-              <path d="M 78 40 Q 82 38, 86 40 T 90 45 T 88 49 T 82 49 T 76 46 T 76 42 Z" />
+              <path d="M 23 37 C 27 36, 30 40, 31 44 Q 32 48, 30 54 T 25 57 T 21 49 T 20 42 Z" />
               {/* Greenland */}
-              <path d="M 24 5 C 26 3, 30 3, 32 6 Q 30 10, 26 9 Z" />
+              <path d="M 29 5 C 32 3, 37 4, 38 7 Q 35 11, 30 9 Z" />
+              {/* Europe & North Eurasia */}
+              <path d="M 43 11 C 47 7, 54 8, 60 9 Q 67 11, 74 9 T 82 8 T 92 11 T 96 16 T 93 22 T 84 27 T 72 26 T 60 24 T 50 20 T 42 16 Z" />
+              {/* United Kingdom */}
+              <path d="M 45 13 Q 48 12, 48 15 T 46 16 Z" />
+              {/* South & East Asia */}
+              <path d="M 62 24 C 67 23, 73 24, 78 28 Q 84 31, 88 30 T 93 25 T 87 36 T 78 37 T 68 33 T 63 28 Z" />
+              {/* Japan */}
+              <path d="M 91 18 Q 93 21, 91 24 Z" />
+              {/* Southeast Asian Islands */}
+              <path d="M 79 38 Q 83 37, 85 39 Z" />
+              <path d="M 86 35 Q 89 34, 91 36 Z" />
+              {/* Africa */}
+              <path d="M 44 23 C 51 21, 57 23, 61 27 Q 63 32, 62 38 T 57 48 T 52 54 T 48 48 T 44 37 T 42 29 Z" />
+              {/* Madagascar */}
+              <path d="M 62 44 Q 64 48, 61 50 Z" />
+              {/* Australia */}
+              <path d="M 80 43 C 85 41, 91 43, 93 47 Q 92 52, 87 53 T 79 50 T 78 45 Z" />
             </g>
 
-            {/* Glowing curves representing relief vectors flowing from Global Trust Center (N 44, W 13) */}
-            <g stroke="#10b981" strokeWidth="0.35" fill="none" opacity="0.8">
-              {/* Flow to Sub-Saharan Africa (longitude 50, latitude 33) */}
-              <path d="M 44 13 Q 48 22, 50 33" className="telemetry-link" />
-              {/* Flow to South Asia (longitude 66, latitude 28) */}
-              <path d="M 44 13 Q 55 18, 66 28" className="telemetry-link" />
-              {/* Flow to Latin America & Caribbean (longitude 24, latitude 39) */}
-              <path d="M 44 13 Q 32 23, 24 39" className="telemetry-link" />
+            {/* Connecting Telemetry Corridors from Kampala HQ */}
+            <g fill="none" stroke="url(#mapArcGradient)" strokeWidth="0.32" opacity="0.85">
+              {IMPACT_LOCATIONS.map((loc) => {
+                if (loc.id === hqLocation.id) return null;
+                const midX = (hqLocation.x + loc.x) / 2;
+                const midY = Math.min(hqLocation.y, loc.y) - 6;
+                return (
+                  <path
+                    key={`arc-${loc.id}`}
+                    d={`M ${hqLocation.x} ${hqLocation.y} Q ${midX} ${midY}, ${loc.x} ${loc.y}`}
+                    className="map-dash-stream"
+                  />
+                );
+              })}
             </g>
 
-            {/* Global Trust Center (London Anchor) */}
-            <g>
-              <circle cx="44" cy="13" r="2" fill="#f59e0b" opacity="0.3" />
-              <circle cx="44" cy="13" r="0.8" fill="#f59e0b" />
-              <text x="44" y="10.5" fill="#f59e0b" fontSize="1.8" fontWeight="bold" textAnchor="middle" fontFamily="monospace" letterSpacing="0.1">
-                TRUST CENTER HQ
-              </text>
-            </g>
+            {/* Interactive Location Nodes */}
+            {IMPACT_LOCATIONS.map((loc) => {
+              const isSelected = activeLocation?.id === loc.id;
+              const isHQ = loc.isHQ;
 
-            {/* Active Core Corridors Details & Pulses */}
-            {/* Sub-Saharan Africa Node */}
-            <g>
-              <circle cx="50" cy="33" r="1.5" fill="#10b981" className="ping-ring" />
-              <circle cx="50" cy="33" r="0.9" fill="#10b981" stroke="#ffffff" strokeWidth="0.2" />
-              <rect x="42" y="35" width="16" height="5.5" fill="#12100e/90" stroke="#10b981" strokeWidth="0.15" rx="0.5" />
-              <text x="50" y="37.5" fill="#e5e5e5" fontSize="1.2" textAnchor="middle" fontFamily="monospace" fontWeight="bold">
-                SUB-SAHARAN AFRICA
-              </text>
-              <text x="50" y="39.5" fill="#10b981" fontSize="1" textAnchor="middle" fontFamily="monospace">
-                142 Schools • 120k Students
-              </text>
-            </g>
+              return (
+                <g
+                  key={loc.id}
+                  className="cursor-pointer group"
+                  onMouseEnter={() => setActiveLocation(loc)}
+                  onMouseLeave={() => setActiveLocation(null)}
+                  onClick={() => setActiveLocation(isSelected ? null : loc)}
+                >
+                  {/* Ping Animation Ring */}
+                  <circle
+                    cx={loc.x}
+                    cy={loc.y}
+                    r="1.5"
+                    fill={isHQ ? '#f59e0b' : '#10b981'}
+                    className="map-ping-ring pointer-events-none"
+                  />
 
-            {/* South Asia Node */}
-            <g>
-              <circle cx="66" cy="28" r="1.5" fill="#10b981" className="ping-ring" />
-              <circle cx="66" cy="28" r="0.9" fill="#10b981" stroke="#ffffff" strokeWidth="0.2" />
-              <rect x="58" y="20.5" width="16" height="5.5" fill="#12100e/90" stroke="#10b981" strokeWidth="0.15" rx="0.5" />
-              <text x="66" y="23" fill="#e5e5e5" fontSize="1.2" textAnchor="middle" fontFamily="monospace" fontWeight="bold">
-                SOUTH ASIA SECTOR
-              </text>
-              <text x="66" y="25" fill="#10b981" fontSize="1" textAnchor="middle" fontFamily="monospace">
-                85 Schools • 74k Students
-              </text>
-            </g>
+                  {/* Outer Click Boundary */}
+                  <circle
+                    cx={loc.x}
+                    cy={loc.y}
+                    r="3.5"
+                    fill="transparent"
+                  />
 
-            {/* Latin America Node */}
-            <g>
-              <circle cx="24" cy="39" r="1.5" fill="#10b981" className="ping-ring" />
-              <circle cx="24" cy="39" r="0.9" fill="#10b981" stroke="#ffffff" strokeWidth="0.2" />
-              <rect x="16" y="41.5" width="16" height="5.5" fill="#12100e/90" stroke="#10b981" strokeWidth="0.15" rx="0.5" />
-              <text x="24" y="44" fill="#e5e5e5" fontSize="1.2" textAnchor="middle" fontFamily="monospace" fontWeight="bold">
-                LATIN AMERICA
-              </text>
-              <text x="24" y="46" fill="#10b981" fontSize="1" textAnchor="middle" fontFamily="monospace">
-                42 Schools • 38k Students
-              </text>
-            </g>
-
+                  {/* Core Pin Dot */}
+                  <circle
+                    cx={loc.x}
+                    cy={loc.y}
+                    r={isSelected ? 1.4 : isHQ ? 1.2 : 0.9}
+                    fill={isHQ ? '#f59e0b' : isSelected ? '#059669' : '#10b981'}
+                    stroke="#ffffff"
+                    strokeWidth="0.25"
+                    className="transition-transform duration-200"
+                  />
+                </g>
+              );
+            })}
           </svg>
-        </div>
 
-        {/* Global summary stats panel overlay at the bottom inside dark map */}
-        <div className="border-t border-stone-900 bg-stone-950/80 backdrop-blur-sm p-4 rounded-b-sm flex flex-col sm:flex-row justify-between items-center gap-4 text-left relative z-10">
-          <div className="space-y-1">
-            <span className="font-mono text-[9px] text-[#10b981] font-bold block">SUPPORT CORRIDORS STATUS</span>
-            <p className="font-sans text-xs text-stone-400">
-              Corridors are fully automated, bypass intermediary friction points, and output 87.2% spending directly on site equipment.
-            </p>
-          </div>
-          <div className="flex gap-4 shrink-0 font-mono text-[10px]">
-            <div>
-              <span className="text-stone-500 block uppercase">Outposts</span>
-              <strong className="text-white text-xs">269 Sites</strong>
+          {/* Floating Hover/Click Details Badge (Borderless, Clean Aesthetic) */}
+          {activeLocation && (
+            <div
+              className={`absolute pointer-events-none z-30 transition-all duration-200 ${
+                activeLocation.y < 22
+                  ? '-translate-x-1/2 translate-y-3'
+                  : '-translate-x-1/2 -translate-y-full mb-3'
+              }`}
+              style={{
+                left: `${Math.max(14, Math.min(86, activeLocation.x))}%`,
+                top: `${activeLocation.y}%`,
+              }}
+            >
+              <div className="bg-stone-900/95 dark:bg-stone-950/95 text-white px-3.5 py-2.5 rounded-xl shadow-xl backdrop-blur-md text-left min-w-[170px] max-w-[240px] space-y-1">
+                <div className="flex items-center justify-between gap-2">
+                  <span className="text-[10px] uppercase font-bold tracking-wider text-emerald-400">
+                    {activeLocation.country}
+                  </span>
+                  {activeLocation.isHQ && (
+                    <span className="text-[9px] font-bold px-1.5 py-0.2 rounded bg-amber-500/20 text-amber-300">
+                      HQ
+                    </span>
+                  )}
+                </div>
+                <div className="text-xs font-bold leading-tight text-stone-100">
+                  {activeLocation.name}
+                </div>
+                <div className="text-[11px] text-stone-300 leading-tight">
+                  {activeLocation.focus}
+                </div>
+                <div className="text-[10px] font-bold text-emerald-300 pt-0.5">
+                  {activeLocation.beneficiaries}
+                </div>
+              </div>
             </div>
-            <div className="border-l border-stone-800 pl-3">
-              <span className="text-stone-500 block uppercase">Total Served</span>
-              <strong className="text-[#10b981] text-xs">232,000+</strong>
-            </div>
-          </div>
+          )}
         </div>
 
       </div>
-    </div>
+    </section>
   );
 }

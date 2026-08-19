@@ -85,7 +85,7 @@ export default function NarrativeJourney() {
               </h4>
             </div>
             <p>
-              By 2016, we understood that feeding a child without shielding them is a critical failure. Under Sarah Jenkins-Hume, JD, we authored a custom Child Safeguarding Framework—subsequently validated by UNICEF—that coordinates with local courts and enforcement officers. We launched secret sanctuaries, hotlines, and rescue patrols, physically intervening to pull kids out of illegal weaving mills and sand processing centers.
+              By 2016, we understood that feeding a child without shielding them is a critical failure. Under Sarah Jenkins-Hume, JD, we authored a custom Child Safeguarding Framework, subsequently validated by UNICEF, that coordinates with local courts and enforcement officers. We launched secret sanctuaries, hotlines, and rescue patrols, physically intervening to pull kids out of illegal weaving mills and sand processing centers.
             </p>
             <p>
               Importantly, we recognized that to rescue the child, we must empower her mother. We established structured mother-owned bakeries, livestock cooperatives, and agro-farms. When family heads possess their own certified economic assets, child safety is organically guaranteed from within the household itself. Kids belong in classrooms, not working as domestic laborers.

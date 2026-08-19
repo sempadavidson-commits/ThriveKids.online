@@ -18,9 +18,6 @@ export default function CeoProfileSection({ onExplorePrograms }: CeoProfileSecti
 
       {/* Header Eyebrow */}
       <div className="text-center max-w-3xl mx-auto mb-12 sm:mb-16 space-y-3">
-        <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-emerald-50 dark:bg-emerald-950/50 text-emerald-800 dark:text-emerald-300 text-xs font-mono font-bold tracking-wider uppercase shadow-xs">
-          <span>EXECUTIVE LEADERSHIP &amp; PROVEN INFLUENCE</span>
-        </div>
         <h2 className="text-3xl sm:text-4xl lg:text-5xl font-black text-stone-900 dark:text-white tracking-tight leading-tight transition-colors">
           Transforming Vulnerability Into Visionary Leadership
         </h2>
@@ -35,11 +32,7 @@ export default function CeoProfileSection({ onExplorePrograms }: CeoProfileSecti
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center">
           
           {/* Column 1: Clean CEO Portrait with Credits Below (5 Cols) */}
-          <motion.div 
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.7 }}
+          <div 
             className="lg:col-span-5 flex flex-col items-center text-center"
           >
             {/* Pure Photo Frame - No Overlaid Text or Floating Cards */}
@@ -64,14 +57,10 @@ export default function CeoProfileSection({ onExplorePrograms }: CeoProfileSecti
                 Grassroots Humanitarian &amp; Community Pioneer
               </p>
             </div>
-          </motion.div>
+          </div>
 
           {/* Column 2: Reframed Paragraphic Narrative (7 Cols) */}
-          <motion.div 
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.7, delay: 0.15 }}
+          <div 
             className="lg:col-span-7 text-left space-y-6"
           >
             {/* Leadership Title */}
@@ -106,12 +95,12 @@ export default function CeoProfileSection({ onExplorePrograms }: CeoProfileSecti
               </p>
               <div className="flex items-center justify-between pt-3 text-xs">
                 <span className="font-bold text-white uppercase tracking-wider font-mono">
-                  — The CEO &amp; Founder, <strong>Thrive Kids Foundation</strong>
+                  The CEO and Founder, <strong>Thrive Kids Foundation</strong>
                 </span>
               </div>
             </div>
 
-          </motion.div>
+          </div>
 
         </div>
 

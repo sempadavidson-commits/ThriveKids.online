@@ -10,11 +10,11 @@ const OUTCOMES = [
 ];
 
 const QUOTES = [
-  '“Now I can read and paint my own horizon.” — Amina, Age 16',
-  '“They didn’t just give me livestock; they taught me how to manage a micro-dairy.” — Maria, Guard',
-  '“The mobile clinic saved my twins when drought withered our maize.” — Mwangi family',
-  '“Daniel has finished his primary degree and wants to study civil structures.” — Grandmother',
-  '“Before the borehole, girls walked 8 miles. Now they are in the classroom.” — Chief elder',
+  '“Now I can read and paint my own horizon.” (Amina, Age 16)',
+  '“They didn’t just give me livestock; they taught me how to manage a micro-dairy.” (Maria, Guard)',
+  '“The mobile clinic saved my twins when drought withered our maize.” (Mwangi family)',
+  '“Daniel has finished his primary degree and wants to study civil structures.” (Grandmother)',
+  '“Before the borehole, girls walked 8 miles. Now they are in the classroom.” (Chief elder)',
 ];
 
 export default function ImpactMarquee() {

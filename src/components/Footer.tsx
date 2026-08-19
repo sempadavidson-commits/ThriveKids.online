@@ -8,36 +8,17 @@ interface FooterProps {
 }
 
 export default function Footer({ onNavigate }: FooterProps) {
-  const [scrollY, setScrollY] = useState(0);
   const [activeModal, setActiveModal] = useState<'privacy' | 'terms' | null>(null);
   const { theme, setTheme, systemTheme } = useTheme();
-
-  // Track scroll position to trigger smooth auto-rearrange of links & layouts
-  useEffect(() => {
-    const handleScroll = () => {
-      setScrollY(window.scrollY);
-    };
-    window.addEventListener('scroll', handleScroll, { passive: true });
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
-
-  // Determine auto-rearrangement shift based on scroll
-  const isScrolledNearBottom = typeof window !== 'undefined' 
-    ? (scrollY + window.innerHeight > (document.documentElement.scrollHeight - 600))
-    : false;
 
   return (
     <footer className="relative w-full bg-[#fcfbfa] dark:bg-[#0c0a09] text-stone-700 dark:text-stone-300 py-16 sm:py-24 px-6 sm:px-12 lg:px-20 overflow-hidden select-none transition-colors duration-300">
       
       <div className="max-w-7xl mx-auto space-y-10">
         
-        {/* Dynamic Auto-Rearranging Row without borders or boxes */}
-        <motion.div 
-          layout
-          transition={{ type: 'spring', stiffness: 260, damping: 28 }}
-          className={`flex flex-col lg:flex-row items-center justify-between gap-8 transition-all duration-700 ${
-            isScrolledNearBottom ? 'lg:flex-row' : 'lg:flex-row-reverse'
-          }`}
+        {/* Dynamic Row */}
+        <div 
+          className="flex flex-col lg:flex-row items-center justify-between gap-8"
         >
           
           {/* Brand & Organization Title */}
@@ -161,7 +142,7 @@ export default function Footer({ onNavigate }: FooterProps) {
             </div>
           </motion.div>
 
-        </motion.div>
+        </div>
 
       </div>
 

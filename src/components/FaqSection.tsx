@@ -15,7 +15,7 @@ const FAQ_ITEMS: FaqItem[] = [
     id: 'faq-1',
     category: 'Project Allocation',
     question: 'What percentage of my contribution directly funds field projects?',
-    answer: 'A verified 87.2% of all donations goes directly into our frontline programs—including nutritional feeding, educational scholarships, solar school construction, medical clinics, and clean water wells. Less than 10% supports essential operations and compliance, and under 3% covers administration.',
+    answer: 'A verified 87.2% of all donations goes directly into our frontline programs, including nutritional feeding, educational scholarships, solar school construction, medical clinics, and clean water wells. Less than 10% supports essential operations and compliance, and under 3% covers administration.',
     highlight: '87.2% Direct Field Allocation'
   },
   {
@@ -56,7 +56,7 @@ const FAQ_ITEMS: FaqItem[] = [
 ];
 
 export default function FaqSection() {
-  const [openId, setOpenId] = useState<string | null>('faq-1');
+  const [openId, setOpenId] = useState<string | null>(null);
   const [activeCategory, setActiveCategory] = useState<string>('All');
 
   const categories = ['All', 'Project Allocation', 'Transparency', 'Safeguarding', 'Governance'];

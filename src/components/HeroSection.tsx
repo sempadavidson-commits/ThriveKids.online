@@ -1,10 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
+import HeroGlobe4D from './HeroGlobe4D';
 
 interface HeroSectionProps {
   onExplore?: () => void;
-  onDonateClick?: () => void;
-  onUrgentClick?: () => void;
 }
 
 const HERO_BACKGROUNDS = [
@@ -45,6 +44,9 @@ export default function HeroSection({ onExplore }: HeroSectionProps) {
         <div className="absolute inset-0 bg-gradient-to-t from-stone-950 via-stone-950/60 to-stone-950/80" />
         <div className="absolute inset-0 bg-radial from-transparent via-stone-950/40 to-stone-950" />
       </div>
+
+      {/* 4D High-Tech Realism Animated Globe (Directly behind the text stage) */}
+      <HeroGlobe4D />
 
       {/* Floating Field Metrics (Desktop view) */}
       <div className="absolute inset-0 z-10 pointer-events-none hidden xl:block">
@@ -93,11 +95,13 @@ export default function HeroSection({ onExplore }: HeroSectionProps) {
             fill="none" 
             xmlns="http://www.w3.org/2000/svg"
           >
-            <path 
-              id="archCurve" 
-              d="M 50,210 A 380,240 0 0,1 750,210" 
-              fill="none" 
-            />
+            <defs>
+              <path 
+                id="archCurve" 
+                d="M 50,210 A 380,240 0 0,1 750,210" 
+                fill="none" 
+              />
+            </defs>
             <text 
               className="uppercase tracking-[0.25em] font-black fill-emerald-400" 
               dy="-8"

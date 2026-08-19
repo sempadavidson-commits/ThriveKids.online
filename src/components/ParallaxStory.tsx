@@ -1,54 +1,11 @@
 import React from 'react';
 import { motion } from 'motion/react';
 
-// Live upward counter utility
-function CountingStat({ endValue, duration = 2.5 }: { endValue: number; duration?: number }) {
-  const [count, setCount] = React.useState(0);
-  const elementRef = React.useRef<HTMLSpanElement>(null);
-  const [hasTriggered, setHasTriggered] = React.useState(false);
-
-  React.useEffect(() => {
-    const observer = new IntersectionObserver(
-      (entries) => {
-        if (entries[0].isIntersecting && !hasTriggered) {
-          setHasTriggered(true);
-          let start = 0;
-          const end = endValue;
-          const totalFrames = duration * 60;
-          let frame = 0;
-
-          const counter = () => {
-            frame++;
-            const progress = frame / totalFrames;
-            // Ease out quad
-            const currentCount = Math.round(end * (progress * (2 - progress)));
-            
-            if (frame < totalFrames) {
-              setCount(currentCount);
-              requestAnimationFrame(counter);
-            } else {
-              setCount(end);
-            }
-          };
-          
-          requestAnimationFrame(counter);
-        }
-      },
-      { threshold: 0.1 }
-    );
-
-    if (elementRef.current) {
-      observer.observe(elementRef.current);
-    }
-
-    return () => {
-      observer.disconnect();
-    };
-  }, [endValue, duration, hasTriggered]);
-
+// Direct stat display without scroll delays
+function CountingStat({ endValue }: { endValue: number; duration?: number }) {
   return (
-    <span ref={elementRef} className="font-display font-black text-white text-5xl sm:text-7xl tracking-tighter">
-      {count.toLocaleString()}+
+    <span className="font-display font-black text-white text-5xl sm:text-7xl tracking-tighter">
+      {endValue.toLocaleString()}+
     </span>
   );
 }
@@ -64,12 +21,8 @@ export default function ParallaxStory() {
         {/* Left Side: Overlapping interactive images with parallax offsets */}
         <div className="lg:col-span-7 relative h-[500px] sm:h-[600px] w-full">
           {/* Main big background sheet */}
-          <motion.div
-            initial={{ opacity: 0, y: 80 }}
-            whileInView={{ opacity: 0.8, y: 0 }}
-            viewport={{ once: true, margin: '-10% 0px' }}
-            transition={{ duration: 1.2, ease: 'easeOut' }}
-            className="absolute top-0 left-0 w-[60%] h-[75%] bg-stone-950 rounded-sm overflow-hidden border border-stone-800"
+          <div
+            className="absolute top-0 left-0 w-[60%] h-[75%] bg-stone-950 rounded-sm overflow-hidden border border-stone-800 opacity-90"
           >
             <img 
               src="https://images.unsplash.com/photo-1503676260728-1c00da094a0b?auto=format&fit=crop&q=80&w=1200" 
@@ -77,14 +30,10 @@ export default function ParallaxStory() {
               className="w-full h-full object-cover scale-105"
             />
             <div className="absolute inset-0 bg-gradient-to-t from-stone-950/80 to-transparent"></div>
-          </motion.div>
+          </div>
 
-          {/* Overlapping foreground offset sheet (moves slightly slower - parallax effect) */}
-          <motion.div
-            initial={{ opacity: 0, y: 140 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, margin: '-10% 0px' }}
-            transition={{ duration: 1.5, ease: 'easeOut', delay: 0.2 }}
+          {/* Overlapping foreground offset sheet */}
+          <div
             className="absolute bottom-0 right-4 w-[50%] h-[60%] bg-stone-950 rounded-sm overflow-hidden z-10 border border-stone-800 shadow-2xl"
           >
             <img 
@@ -93,22 +42,18 @@ export default function ParallaxStory() {
               className="w-full h-full object-cover"
             />
             <div className="absolute inset-0 bg-gradient-to-t from-stone-950/60 to-transparent"></div>
-          </motion.div>
+          </div>
 
           {/* Core overlay floating detail text */}
-          <motion.div
-            initial={{ opacity: 0, scale: 0.9 }}
-            whileInView={{ opacity: 1, scale: 1 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.8, delay: 0.6 }}
+          <div
             className="absolute top-1/4 right-[5%] bg-stone-950/90 backdrop-blur-md p-4 max-w-[240px] border border-stone-800 rounded-sm z-20 pointer-events-none text-left"
           >
             <span className="font-mono text-[9px] uppercase tracking-widest text-[#10b981]">01 / FIELD DOCUMENT</span>
             <p className="font-editorial text-stone-200 text-sm italic mt-1 leading-relaxed">
               "We must record families not as targets of charity, but as architects of their own liberation."
             </p>
-            <span className="block font-mono text-[80%] text-stone-500 mt-2">— Field Officer Diary, Ngong</span>
-          </motion.div>
+            <span className="block font-mono text-[80%] text-stone-500 mt-2">Field Officer Diary, Ngong</span>
+          </div>
         </div>
 
         {/* Right Side: Editorial statement, statistics counting upwards, narrative text */}

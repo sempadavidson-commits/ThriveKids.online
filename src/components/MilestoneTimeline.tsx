@@ -75,7 +75,7 @@ export default function MilestoneTimeline() {
               15-YEAR VERIFIABLE CHRONICLE
             </span>
             <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight text-stone-950">
-              Our Journey of Impact (2011 – 2026)
+              Our Journey of Impact (2011 to 2026)
             </h2>
             <p className="text-stone-600 text-sm sm:text-base font-light max-w-xl">
               From an emergency pediatric drought outpost to a global child welfare movement spanning 395 districts.
